@@ -1,0 +1,11 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.rddt__country-select {
+    background-color: white !important;
+  }
+  
+  .rddt__country-select:focus {
+    outline: none !important;
+  }
