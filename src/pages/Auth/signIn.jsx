@@ -54,38 +54,35 @@ const SignIn = () => {
   });
 
   return (
-    <div className="flex bg-[#fff] w-full">
-      <div className="flex flex-wrap justify-start w-[30%]">
-        <img src={Vasset} className="h-[100vh]" />
-      </div>
-      <div className="stan justify-center items-center flex-wrap pl-[206px] pr-[206px] align-middle">
+    <div className=" bg-[#fff] w-full h-full">
+      <div className="justify-center items-center align-middle">
         <form onSubmit={formik.handleSubmit}>
-          <div className="pt-10 items-center">
-            <h1 className="text-[38px] pb-10 font-lato font-bold text-[#036]">
+          <div className=" items-center">
+            <h1 className="text-[38px] pb-10 font-lato font-bold pt-5 text-[#036] text-center">
               Login
             </h1>
-            <div className="pt-10 flex gap-[59px] items-center justify-center">
+            <div className="pt-10 flex gap-10 items-center justify-center">
               <img src={facebook} className="h-[35px] w-[35px]" />
               <img src={google} className="h-[35px] w-[35px]" />
               <img src={apple} className="h-[35px] w-[35px]" />
             </div>
-            <div className="flex items-center pt-[39px] justify-center pb-[39px]">
-              <hr className="border border-[#666] w-[220px]" />
+            <div className="flex items-center pt-10 justify-center">
+              <hr className="border border-[#666] w-20" />
               <h1 className="text-[20px] font-lato text-[#036] mx-2">
                 or login with
               </h1>
-              <hr className="border border-[#666] w-[220px]" />
+              <hr className="border border-[#666] w-20" />
             </div>
-            <div className="items-center  justify-center">
+            <div className="items-center  justify-center p-5">
               <div className="pt-5" style={{ position: "relative" }}>
-                <h1 className="text-[24px] font-lato font-bold text-[#036] pb-[30px]">
+                <h1 className="text-[24px] font-lato font-bold text-[#036] pb-10">
                   Email
                 </h1>
                 <input
                   type="text"
                   {...formik.getFieldProps("email")}
-                  className="border-2 border-[#D9E7F0] w-[600px] h-[50px] px-2 rounded-[15px] text-[#000] bg-white"
-                  style={{ paddingLeft: "60px" }} // Add padding to prevent the text from overlapping with the icon
+                  className="border-2 border-[#D9E7F0] w-[95%] h-[50px] px-2 rounded-[15px] text-[#000] bg-white "
+                  style={{ paddingLeft: "60px" }}
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +93,7 @@ const SignIn = () => {
                   style={{
                     position: "absolute", // Position the SVG absolutely
                     left: "10px", // Adjust the position as needed
-                    top: "95px", // Adjust the position as needed
+                    top: "105px", // Adjust the position as needed
                   }}
                 >
                   <path
@@ -120,13 +117,13 @@ const SignIn = () => {
                   <input
                     type={isPasswordVisible ? "text" : "password"}
                     {...formik.getFieldProps("password")}
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[50px] px-2 rounded-[15px] bg-white text-[#000]"
+                    className="border-2 border-[#D9E7F0] h-[50px] px-2 w-[95%] rounded-[15px] bg-white text-[#000]"
                   />
                   <i
                     onClick={() => setPasswordVisibility(!isPasswordVisible)}
                     style={{
                       position: "absolute",
-                      right: "10px",
+                      right: "30px",
                       top: "10px",
                       cursor: "pointer",
                       color: "Black",
@@ -143,25 +140,27 @@ const SignIn = () => {
                   </div>
                 ) : null}
               </div>
-              <button
-                type="submit"
-                className="bg-[#036] text-[#fff] w-[600px] h-[50px] rounded-[50px] mt-[50px] font-lato text-[24px]"
-                onClick={() => navigate(Routes.Dashboard)}
-              >
-                <h1 className="text-[24px] font-lato font-bold text-[#fff]">
-                  Login
-                </h1>
-              </button>
+              <div className="flex justify-center items-center align-middle">
+                <button
+                  type="submit"
+                  className="bg-[#036] text-[#fff]  h-[50px] rounded-[50px] w-[80%] mt-10 font-lato text-[24px] text-center"
+                  onClick={() => navigate(Routes.Dashboard)}
+                >
+                  <h1 className="text-[24px] font-lato font-bold text-[#fff]">
+                    Login
+                  </h1>
+                </button>
+              </div>
               <div
                 className="flex pt-5 justify-center items-center"
-                onClick={() => navigate("/")}
+                onClick={() => navigate(Routes.SignUp1)}
               >
                 <h1 className="text-[20px] font-lato text-[#000]">
                   Don’t have an account?
                 </h1>
                 <button
                   className="text-[20px] font-lato text-[#000] font-bold underline bg-white"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate(Routes.SignUp1)}
                 >
                   Sign up
                 </button>

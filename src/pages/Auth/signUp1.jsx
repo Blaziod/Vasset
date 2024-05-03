@@ -6,6 +6,7 @@ import google from "../../assets/google.png";
 import apple from "../../assets/apple.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Routes } from "routes/routes.config";
 
 const validationSchema = yup.object().shape({
   firstName: yup.string().required("First name is required"),
@@ -55,38 +56,35 @@ const SignUp1 = () => {
     validationSchema,
     onSubmit: (values) => {
       localStorage.setItem("formValues", JSON.stringify(values));
-      navigate("/signup2");
+      navigate(Routes.SignUp2);
     },
   });
 
   return (
-    <div className="flex bg-[#fff] w-[100vw]">
-      <div className="flex justify-start w-[30%]">
-        <img src={Vasset} className="h-[100vh]" />
-      </div>
-      <div className="stan justify-center items-center pl-[206px] pr-[206px] align-middle">
+    <div className=" bg-[#fff] w-full h-full">
+      <div className="justify-center items-center align-middle">
         <form onSubmit={formik.handleSubmit}>
           <div className="pt-5 items-center">
-            <h1 className="text-[18px] font-lato font-bold text-[#000]  text-center">
+            <h1 className="text-[18px] font-lato font-bold text-[#000] pt-10 text-center">
               Create Account
             </h1>
             <h1 className="text-[14px] font-lato text-[#000] pt-[11px]  text-center">
               You’re off to a great start
             </h1>
-            <div className="pt-10 flex gap-[59px] items-center justify-center">
+            <div className="pt-10 flex gap-10 items-center justify-center">
               <img src={facebook} className="h-[30px] w-[30px]" />
               <img src={google} className="h-[30px] w-[30px]" />
               <img src={apple} className="h-[30px] w-[30px]" />
             </div>
             <div className="flex items-center pt-[39px] justify-center">
-              <hr className="border border-[#666] w-[220px]" />
+              <hr className="border border-[#666] w-20" />
               <h1 className="text-[14px] font-lato text-[#036] mx-2">
                 or signup with email
               </h1>
-              <hr className="border border-[#666] w-[220px]" />
+              <hr className="border border-[#666] w-20" />
             </div>
-            <div className="items-center  justify-center">
-              <div className="flex pt-[35px] justify-between">
+            <div className="items-center  justify-center p-5 ">
+              <div className="pt-10 gap-5">
                 <div>
                   <h1 className="text-[14px] font-lato font-bold text-[#036] pb-[10px]">
                     First name
@@ -94,7 +92,7 @@ const SignUp1 = () => {
                   <input
                     type="text"
                     {...formik.getFieldProps("firstName")}
-                    className="border-2 border-[#D9E7F0] w-[220px] h-[40px] px-2 rounded-[15px] bg-white text-[#000]"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                   {formik.touched.firstName && formik.errors.firstName ? (
                     <div
@@ -111,7 +109,7 @@ const SignUp1 = () => {
                   <input
                     type="text"
                     {...formik.getFieldProps("lastName")}
-                    className="border-2 border-[#D9E7F0] w-[220px] h-[40px] px-2 text-[#000] rounded-[15px] bg-white"
+                    className="border-2 border-[#D9E7F0] w-[95%] h-[40px] px-2 rounded-[15px] text-[#000] bg-white"
                   />
                   {formik.touched.lastName && formik.errors.lastName ? (
                     <div
@@ -129,7 +127,7 @@ const SignUp1 = () => {
                 <input
                   type="text"
                   {...formik.getFieldProps("email")}
-                  className="border-2 border-[#D9E7F0] w-[600px] h-[40px] px-2 rounded-[15px] text-[#000] bg-white"
+                  className="border-2 border-[#D9E7F0] w-[95%] h-[40px] px-2 rounded-[15px] text-[#000] bg-white"
                 />
                 {formik.touched.email && formik.errors.email ? (
                   <div
@@ -147,13 +145,13 @@ const SignUp1 = () => {
                   <input
                     type={isPasswordVisible ? "text" : "password"}
                     {...formik.getFieldProps("password")}
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[40px] px-2 rounded-[15px] bg-white text-[#000]"
+                    className="border-2 border-[#D9E7F0] w-[95%] h-[40px] px-2 rounded-[15px] bg-white text-[#000]"
                   />
                   <i
                     onClick={() => setPasswordVisibility(!isPasswordVisible)}
                     style={{
                       position: "absolute",
-                      right: "10px",
+                      right: "30px",
                       top: "10px",
                       cursor: "pointer",
                       color: "Black",
@@ -178,7 +176,7 @@ const SignUp1 = () => {
                   <input
                     type={isConfirmPasswordVisible ? "text" : "password"}
                     {...formik.getFieldProps("confirmPassword")}
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[40px] px-2 rounded-[15px] bg-white text-[#000]"
+                    className="border-2 border-[#D9E7F0] w-[95%] h-[40px] px-2 rounded-[15px] bg-white text-[#000]"
                   />
                   <i
                     onClick={() =>
@@ -186,7 +184,7 @@ const SignUp1 = () => {
                     }
                     style={{
                       position: "absolute",
-                      right: "10px",
+                      right: "30px",
                       top: "10px",
                       cursor: "pointer",
                       color: "Black",
@@ -204,12 +202,14 @@ const SignUp1 = () => {
                   </div>
                 ) : null}
               </div>
-              <button
-                type="submit"
-                className="bg-[#036] text-[#fff] w-[600px] h-[40px] rounded-[50px] mt-[20px] font-lato"
-              >
-                Next
-              </button>
+              <div className="flex justify-center items-center">
+                <button
+                  type="submit"
+                  className="bg-[#036] text-[#fff] w-[90%] h-[40px] rounded-[50px] mt-[20px] flex font-lato justify-center items-center"
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </form>

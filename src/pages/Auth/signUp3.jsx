@@ -4,6 +4,7 @@ import Vasset from "../../assets/vasset.png";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useNavigate } from "react-router-dom";
+import { Routes } from "routes/routes.config";
 
 // const validationSchema = yup.object().shape({
 //   nextOfKinRelationship: yup
@@ -36,16 +37,13 @@ const SignUp3 = () => {
     },
     onSubmit: (values) => {
       localStorage.setItem("formValues2", JSON.stringify(values));
-      navigate("/signup4");
+      navigate(Routes.SignUp4);
     },
   });
 
   return (
-    <div className="flex bg-[#fff] w-[100vw]">
-      <div className="flex justify-start w-[30%]">
-        <img src={Vasset} className="h-[100vh]" />
-      </div>
-      <div className="stan justify-center items-center pl-[206px] pr-[206px] align-middle">
+    <div className=" bg-[#fff] w-[100vw]">
+      <div className="stan justify-center items-center align-middle">
         <form onSubmit={formik.handleSubmit}>
           <div className="pt-5 items-center">
             <h1 className="text-[18px] font-lato font-bold text-[#000]  text-center">
@@ -60,7 +58,7 @@ const SignUp3 = () => {
             <h1 className="text-[14px] font-lato text-[#000] pt-[11px]  text-center">
               You’re off to a great start
             </h1>{" "}
-            <div className="items-center  justify-center">
+            <div className="items-center  justify-center p-5">
               <div className="pt-5">
                 <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
                   Next of Kin Relationship *
@@ -70,7 +68,7 @@ const SignUp3 = () => {
                   required
                   name="nextOfKinRelationship"
                   onChange={formik.handleChange}
-                  className="border-2 border-[#D9E7F0] w-[250px] h-[30px] px-2 rounded-[15px] text-[#000] bg-white"
+                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                 />
               </div>
               <div className="pt-5">
@@ -83,7 +81,7 @@ const SignUp3 = () => {
                     required
                     name="nextOfKinFirstName"
                     onChange={formik.handleChange}
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[30px] px-2 rounded-[15px] bg-white text-[#000]"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                 </div>
               </div>
@@ -97,7 +95,7 @@ const SignUp3 = () => {
                     required
                     name="nextOfKinLastName"
                     onChange={formik.handleChange}
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[30px] px-2 rounded-[15px] bg-white text-[#000]"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                 </div>
               </div>
@@ -111,7 +109,7 @@ const SignUp3 = () => {
                     required
                     name="nextOfKinAddress"
                     onChange={formik.handleChange}
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[30px] px-2 rounded-[15px] bg-white text-[#000]"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                 </div>
                 <div className="pt-5">
@@ -123,7 +121,7 @@ const SignUp3 = () => {
                     required
                     name="nextOfKinEmail"
                     onChange={formik.handleChange}
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[30px] px-2 text-[#000] rounded-[15px] bg-white"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                 </div>
               </div>
@@ -138,17 +136,19 @@ const SignUp3 = () => {
                     placeholder="Enter phone number"
                     international
                     defaultCountry="US"
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[30px] px-2 rounded-[15px] bg-white text-[#fff]"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                 </div>
               </div>
-              <button
-                type="submit"
-                className="bg-[#036] text-[#fff] w-[300px] h-[40px] rounded-[50px] mt-[20px] font-lato"
-              >
-                Save & Continue
-              </button>
-              <div className="flex pt-5">
+              <div className="flex justify-center items-center">
+                <button
+                  type="submit"
+                  className="bg-[#036] text-[#fff] w-[300px] h-[40px] rounded-[50px] mt-[20px] font-lato"
+                >
+                  Save & Continue
+                </button>
+              </div>
+              <div className="flex pt-5 justify-center items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="14"
@@ -167,7 +167,7 @@ const SignUp3 = () => {
                   Your Info is safely secured
                 </h1>
               </div>
-              <h1 className="text-[#036] font-lato text-[14px] pt-6 underline">
+              <h1 className="text-[#036] font-lato text-[14px] pt-6 underline text-center">
                 Save & return to Dashboard
               </h1>
             </div>

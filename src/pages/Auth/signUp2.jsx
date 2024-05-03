@@ -3,6 +3,7 @@ import Vasset from "../../assets/vasset.png";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useNavigate } from "react-router-dom";
+import { Routes } from "routes/routes.config";
 
 const SignUp2 = () => {
   const navigate = useNavigate();
@@ -17,18 +18,15 @@ const SignUp2 = () => {
     },
     onSubmit: (values) => {
       localStorage.setItem("formValues1", JSON.stringify(values));
-      navigate("/signup3");
+      navigate(Routes.SignUp3);
     },
   });
 
   return (
-    <div className="flex bg-[#fff] w-[100vw]">
-      <div className="flex justify-start w-[30%]">
-        <img src={Vasset} className="h-[100vh]" />
-      </div>
-      <div className="stan justify-center items-center pl-[206px] pr-[206px] align-middle">
+    <div className="bg-[#fff] w-full h-full">
+      <div className="stan justify-center items-center align-middle">
         <form onSubmit={formik.handleSubmit}>
-          <div className="pt-5 items-center">
+          <div className="p-5 items-center justify-center align-middle">
             <h1 className="text-[18px] font-lato font-bold text-[#000]  text-center">
               Create Account
             </h1>
@@ -41,7 +39,7 @@ const SignUp2 = () => {
             <h1 className="text-[14px] font-lato text-[#000] pt-[11px]  text-center">
               You’re off to a great start
             </h1>{" "}
-            <div className="items-center  justify-center">
+            <div>
               <div className="pt-5">
                 <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
                   Country *
@@ -51,7 +49,7 @@ const SignUp2 = () => {
                   required
                   name="country"
                   onChange={formik.handleChange}
-                  className="border-2 border-[#D9E7F0] w-[600px] h-[40px] px-2 rounded-[15px] text-[#000] bg-white"
+                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                 />
               </div>
               <div className="pt-5">
@@ -64,7 +62,7 @@ const SignUp2 = () => {
                     required
                     name="streetAddress" // added
                     onChange={formik.handleChange} // added
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[40px] px-2 rounded-[15px] bg-white text-[#000]"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                 </div>
               </div>
@@ -78,11 +76,11 @@ const SignUp2 = () => {
                     required
                     name="city" // added
                     onChange={formik.handleChange} // added
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[40px] px-2 rounded-[15px] bg-white text-[#000]"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                 </div>
               </div>
-              <div className="flex pt-5 justify-between">
+              <div className=" pt-5">
                 <div>
                   <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
                     State *
@@ -92,7 +90,7 @@ const SignUp2 = () => {
                     required
                     name="state" // added
                     onChange={formik.handleChange} // added
-                    className="border-2 border-[#D9E7F0] w-[220px] h-[40px] px-2 rounded-[15px] bg-white text-[#000]"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                 </div>
                 <div>
@@ -104,7 +102,7 @@ const SignUp2 = () => {
                     required
                     name="postalCode" // added
                     onChange={formik.handleChange}
-                    className="border-2 border-[#D9E7F0] w-[220px] h-[40px] px-2 text-[#000] rounded-[15px] bg-white"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                 </div>
               </div>
@@ -119,17 +117,19 @@ const SignUp2 = () => {
                     defaultCountry="US"
                     name="phoneNumber" // added
                     onChange={formik.handleChange}
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[40px] px-2 rounded-[15px] bg-white text-[#fff]"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
                   />
                 </div>
               </div>
-              <button
-                type="submit"
-                className="bg-[#036] text-[#fff] w-[300px] h-[40px] rounded-[50px] mt-[20px] font-lato"
-              >
-                Save & Continue
-              </button>
-              <div className="flex pt-5 gap-2">
+              <div className="flex align-middle items-center justify-center">
+                <button
+                  type="submit"
+                  className="bg-[#036] text-[#fff] w-[300px] h-[40px] rounded-[50px] mt-[20px] font-lato"
+                >
+                  Save & Continue
+                </button>
+              </div>
+              <div className="flex pt-5 gap-2 justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="14"
@@ -148,7 +148,7 @@ const SignUp2 = () => {
                   Your Info is safely secured
                 </h1>
               </div>
-              <h1 className="text-[#036] font-lato text-[14px] pt-6 underline">
+              <h1 className="text-[#036] font-lato text-[14px] pt-6 underline text-center">
                 Save & return to Dashboard
               </h1>
             </div>

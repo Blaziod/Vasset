@@ -2,6 +2,8 @@ import Vasset from "assets/vassethome.png";
 import Vasset1 from "assets/Vassethome1.png";
 import Vasset2 from "assets/vassethome2.png";
 import Vasset3 from "assets/vh.png";
+import { Routes } from "routes/routes.config";
+import { useNavigate } from "react-router-dom";
 
 const VassetName = () => {
   return (
@@ -107,6 +109,7 @@ const VassetLogo1 = () => {
 };
 
 const Homepage = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full bg-white justify-center overflow-x-hidden">
       <div class="flex flex-wrap justify-between pl-10 pr-10 p-5">
@@ -124,8 +127,13 @@ const Homepage = () => {
           <h1 class="text-[15px] lato-bold text-[#036]">FAQs</h1>
           <h1 class="text-[15px] lato-bold text-[#036]">Contact</h1>
           <div class="flex gap-10">
-            <h1 class="text-[20px] lato-bold text-[#036]">Login</h1>
-            <button class="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center">
+            <div onClick={() => navigate(Routes.SignIn)}>
+              <h1 class="text-[20px] lato-bold text-[#036]">Login</h1>
+            </div>
+            <button
+              class="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center"
+              onClick={() => navigate(Routes.SignUp1)}
+            >
               <h1 class="text-[15px] text-[#fff] lato-bold">Sign Up</h1>
             </button>
           </div>

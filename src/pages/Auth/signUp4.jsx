@@ -3,6 +3,8 @@ import * as yup from "yup";
 import Vasset from "../../assets/vasset.png";
 import "react-phone-number-input/style.css";
 import { useState } from "react";
+import { Routes } from "routes/routes.config";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object().shape({
   firstName: yup.string().required("First name is required"),
@@ -20,6 +22,7 @@ const validationSchema = yup.object().shape({
 });
 
 const SignUp4 = () => {
+  const navigate = useNavigate();
   const [selectedButton, setSelectedButton] = useState(null);
   const [image, setImage] = useState(null);
 
@@ -52,43 +55,40 @@ const SignUp4 = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      navigate(Routes.Dashboard);
     },
   });
 
   return (
-    <div className="flex bg-[#fff] w-[100vw]">
-      <div className="flex justify-start w-[30%]">
-        <img src={Vasset} className="h-[100vh]" />
-      </div>
-      <div className="stan justify-center items-center pl-[206px] pr-[206px] align-middle">
+    <div className=" bg-[#fff] w-full h-full">
+      <div className="stan justify-center items-center align-middle">
         <form onSubmit={formik.handleSubmit}>
           <div className="pt-5 items-center">
-            <h1 className="text-[18px] font-lato font-bold text-[#000]  text-center">
+            <h1 className="text-[18px] lato-bold text-[#000]  text-center">
               Create Account
             </h1>
-            <h1 className="text-[16px] font-lato font-bold text-[#000]  text-center pt-2">
+            <h1 className="text-[16px] lato-bold text-[#000]  text-center pt-2">
               Identification/KYC Verification
             </h1>
             <h1 className="text-[14px] font-lato text-[#000] pt-[11px]  text-center">
               All fields marked with a * must be completed
             </h1>
-            <h1 className="text-[14px] font-lato text-[#000] pt-[11px]  text-center">
+            <h1 className="text-[14px] lato-regular text-[#000] pt-[11px]  text-center">
               You’re off to a great start
             </h1>{" "}
-            <div className="items-center  justify-center">
+            <div className="items-center  justify-center p-5">
               <div>
-                <h1 className="text-[18px] font-lato font-bold text-[#000] pt-[35px]">
+                <h1 className="text-[18px] lato-bold text-[#000] text-center">
                   Upload your ID Document
                 </h1>
-                <h1 className="text-[14px] font-lato font-bold text-[#000] pt-[20px]">
+                <h1 className="text-[14px] lato-bold text-[#000] pt-[10px] text-center">
                   Select Document Type
                 </h1>
               </div>
-              <div className="mt-[20px] flex justify-between">
+              <div className="mt-[20px] gap-2 flex justify-between">
                 <button
                   onClick={() => handleButtonClick(0)}
-                  className="border-2 border-[#D9E7F0] w-[250px] h-[40px] px-2 rounded-[10px] text-[#000] bg-white  flex items-center"
+                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
                 >
                   <div className="mr-3">
                     <svg
@@ -111,7 +111,7 @@ const SignUp4 = () => {
                 </button>
                 <button
                   onClick={() => handleButtonClick(1)}
-                  className="border-2 border-[#D9E7F0] w-[250px] h-[40px] px-2 rounded-[10px] text-[#000] bg-white  flex items-center"
+                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
                 >
                   <div className="mr-3">
                     <svg
@@ -133,10 +133,10 @@ const SignUp4 = () => {
                   NIN
                 </button>
               </div>
-              <div className="mt-[10px] flex justify-between">
+              <div className="mt-[10px] gap-2 flex justify-between">
                 <button
                   onClick={() => handleButtonClick(2)}
-                  className="border-2 border-[#D9E7F0] w-[250px] h-[40px] px-2 rounded-[10px] text-[#000] bg-white  flex items-center"
+                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
                 >
                   <div className="mr-3">
                     <svg
@@ -159,7 +159,7 @@ const SignUp4 = () => {
                 </button>
                 <button
                   onClick={() => handleButtonClick(3)}
-                  className="border-2 border-[#D9E7F0] w-[250px] h-[40px] px-2 rounded-[10px] text-[#000] bg-white  flex items-center"
+                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
                 >
                   <div className="mr-3">
                     <svg
@@ -182,54 +182,52 @@ const SignUp4 = () => {
                 </button>
               </div>
 
-              <div className="pt-5 flex justify-between">
+              <div className="mt-[10px]">
+                <h1 className="text-[14px] lato-bold text-[#000] pb-[10px]">
+                  Issue Date *
+                </h1>
+                <input
+                  type="text"
+                  required
+                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
+                />
+
                 <div>
-                  <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
-                    Issue Date *
-                  </h1>
-                  <input
-                    type="text"
-                    required
-                    className="border-2 border-[#D9E7F0] w-[250px] h-[30px] px-2 rounded-[10px] text-[#000] bg-white"
-                  />
-                </div>
-                <div>
-                  <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
+                  <h1 className="text-[14px] lato-bold text-[#000] pb-[10px]">
                     Expiration Date *
                   </h1>
                   <input
                     type="text"
                     required
-                    className="border-2 border-[#D9E7F0] w-[250px] h-[30px] px-2 rounded-[10px] text-[#000] bg-white"
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
                   />
                 </div>
               </div>
 
               <div className="pt-5">
-                <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
+                <h1 className="text-[14px] lato-bold text-[#000] pb-[10px]">
                   BVN *
                 </h1>
-                <div style={{ position: "relative" }}>
-                  <input
-                    type={"text"}
-                    required
-                    className="border-2 border-[#D9E7F0] w-[600px] h-[30px] px-2 rounded-[10px] bg-white text-[#000]"
-                  />
-                </div>
+
+                <input
+                  type={"text"}
+                  required
+                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[98%] px-2 bg-white text-[#000]"
+                />
               </div>
               {/* let formValues = JSON.parse(localStorage.getItem('formValues'));
 let firstName = formValues ? formValues.firstName : ''; */}
               <div className="pt-5 ">
-                <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
+                <h1 className="text-[14px] lato-bold text-[#000] pb-[10px]">
                   Upload Picture *
                 </h1>
-                <div className="flex align-middle gap-10 items-center">
+                <div className="flex align-middle gap-10 items-center justify-center">
                   <div>
                     <input
                       type="file"
                       accept="image/*"
                       onChange={handleImageUpload}
-                      className="bg-[#fff] text-[#888] w-[250px] h-[40px] rounded-[10px] font-lato border-2 border-[#D9E7F0] cursor-pointer"
+                      className="bg-[#fff] text-[#888] w-[95%] px-2 h-[40px] rounded-[10px] font-lato border-2 border-[#D9E7F0] cursor-pointer"
                       id="imageUpload"
                     />
                   </div>
@@ -242,14 +240,15 @@ let firstName = formValues ? formValues.firstName : ''; */}
                   )}
                 </div>
               </div>
-
-              <button
-                type="submit"
-                className="bg-[#036] text-[#fff] w-[300px] h-[40px] rounded-[50px] mt-[20px] font-lato"
-              >
-                Save & Continue
-              </button>
-              <div className="flex pt-3">
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="bg-[#036] text-[#fff] w-[300px] h-[40px] rounded-[50px] mt-[20px] font-lato"
+                >
+                  Save & Continue
+                </button>
+              </div>
+              <div className="flex pt-3 justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="14"
@@ -268,7 +267,7 @@ let firstName = formValues ? formValues.firstName : ''; */}
                   Your Info is safely secured
                 </h1>
               </div>
-              <h1 className="text-[#036] font-lato text-[14px] pt-3 underline">
+              <h1 className="text-[#036] font-lato text-[14px] pt-3 underline text-center">
                 Save & return to Dashboard
               </h1>
             </div>
