@@ -55,10 +55,10 @@ const SignIn = () => {
 
   return (
     <div className="flex bg-[#fff] w-[100vw]">
-      <div className="flex justify-start w-[30%]">
+      <div className="flex flex-wrap justify-start w-[30%]">
         <img src={Vasset} className="h-[100vh]" />
       </div>
-      <div className="stan justify-center items-center pl-[206px] pr-[206px] align-middle">
+      <div className="stan justify-center items-center flex-wrap pl-[206px] pr-[206px] align-middle">
         <form onSubmit={formik.handleSubmit}>
           <div className="pt-10 items-center">
             <h1 className="text-[38px] pb-10 font-lato font-bold text-[#036]">

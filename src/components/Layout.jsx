@@ -463,7 +463,7 @@ const Layout = () => {
   ];
 
   return (
-    <div className="w-[100vw] h-[100vh] flex">
+    <div className="w-[100vw] h-[100vh] flex flex-wrap">
       {!authRoutes.includes(location.pathname) && (
         <div className="w-[15%] bg-white shadow-[50px] flex flex-col rounded-tr-[100px] rounded-bl-lg">
           <div className="flex gap-3 pt-5 items-center justify-center">
@@ -540,7 +540,7 @@ const Layout = () => {
           </div>
         </div>
       )}
-      <div className="bg-[#F5F5F5] w-[85%]">
+      <div className="bg-[#F5F5F5] w-full">
         <Routes>
           {AppRoutes.map((route) => (
             <Route

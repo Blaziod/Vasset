@@ -1,7 +1,7 @@
 import Vasset from "assets/vassethome.png";
 import Vasset1 from "assets/Vassethome1.png";
 import Vasset2 from "assets/vassethome2.png";
-import Vasset3 from "assets/Features 2.png";
+import Vasset3 from "assets/vh.png";
 
 const VassetName = () => {
   return (
@@ -108,9 +108,9 @@ const VassetLogo1 = () => {
 
 const Homepage = () => {
   return (
-    <div className="w-[99vw] bg-white justify-center">
-      <div className="flex justify-between pl-10 pr-10 p-5">
-        <div className="flex gap-3 pt-5 items-start justify-start">
+    <div className="w-full bg-white justify-center overflow-x-hidden">
+      <div class="flex flex-wrap justify-between pl-10 pr-10 p-5">
+        <div class="flex gap-3 pt-5 items-start justify-start">
           <div>
             <VassetLogo />
           </div>
@@ -118,20 +118,21 @@ const Homepage = () => {
             <VassetName />
           </div>
         </div>
-        <div className="flex gap-10">
-          <h1 className="text-[15px] lato-bold text-[#036]">Home</h1>
-          <h1 className="text-[15px] lato-bold text-[#036]">Service</h1>
-          <h1 className="text-[15px] lato-bold text-[#036]">FAQs</h1>
-          <h1 className="text-[15px] lato-bold text-[#036]">Contact</h1>
-        </div>
-        <div className="flex gap-10">
-          <h1 className="text-[20px] lato-bold text-[#036]">Login</h1>
-          <button className="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center">
-            <h1 className="text-[15px] text-[#fff] lato-bold">Sign Up</h1>
-          </button>
+        <div class="flex flex-wrap gap-10 justify-center">
+          <h1 class="text-[15px] lato-bold text-[#036]">Home</h1>
+          <h1 class="text-[15px] lato-bold text-[#036]">Service</h1>
+          <h1 class="text-[15px] lato-bold text-[#036]">FAQs</h1>
+          <h1 class="text-[15px] lato-bold text-[#036]">Contact</h1>
+          <div class="flex gap-10">
+            <h1 class="text-[20px] lato-bold text-[#036]">Login</h1>
+            <button class="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center">
+              <h1 class="text-[15px] text-[#fff] lato-bold">Sign Up</h1>
+            </button>
+          </div>
         </div>
       </div>
-      <div className="justify-center flex items-center">
+
+      <div className="justify-center flex  items-center">
         <img src={Vasset} />
       </div>
       <div className="p-10 pt-20 justify-center flex items-center">
@@ -140,29 +141,12 @@ const Homepage = () => {
       <div className="p-10 pt-20 justify-center flex items-center">
         <img src={Vasset2} />
       </div>
-      <div className="p-10 pt-20 justify-between flex items-center">
+
+      <div className="p-10 pt-20 justify-center flex items-center">
         <img src={Vasset3} />
-        <div>
-          <h1 className="text-[50px] text-[#252B42] lato-bold text-right">
-            Start Your Journey to Financial Success
-          </h1>
-          <h1 className="text-[30px] text-[#737373] lato-regular text-right">
-            Ready to take control of your financial future? Join Vasset Global
-            Limited today and embark on a journey to financial success. With our
-            intuitive platform, expert guidance, and innovative investment
-            solutions, achieving your goals has never been easier. Sign up now
-            and start investing with confidence.
-          </h1>
-          <div className=" flex justify-end items-end pt-5">
-            <button className="bg-[#003366] p-3 rounded-[6px]">
-              <h1 className="text-[15px] text-[#fff] lato-regular">
-                Get Started
-              </h1>
-            </button>
-          </div>
-        </div>
       </div>
-      <div className="flex gap-3 pt-5 p-20 items-start justify-between bg-[#003366] h-[190px]">
+
+      <div className="flex flex-wrap gap-3 pt-5 p-20 items-start justify-between bg-[#003366] h-[190px]">
         <div>
           <div className="flex gap-3">
             <div>

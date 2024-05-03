@@ -108,7 +108,7 @@ export const AppRoutes = [
   {
     path: Routes.SignIn,
     exact: true,
-    isPrivate: false,
+    isPrivate: true,
     component: <SignIn />,
   },
 ];
