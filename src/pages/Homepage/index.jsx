@@ -121,22 +121,42 @@ const Homepage = () => {
             <VassetName />
           </div>
         </div>
-        <div class="flex flex-wrap gap-10 justify-center">
-          <h1 class="text-[15px] lato-bold text-[#036]">Home</h1>
-          <h1 class="text-[15px] lato-bold text-[#036]">Service</h1>
-          <h1 class="text-[15px] lato-bold text-[#036]">FAQs</h1>
-          <h1 class="text-[15px] lato-bold text-[#036]">Contact</h1>
-          <div class="flex gap-10">
-            <div onClick={() => navigate(Routes.SignIn)}>
-              <h1 class="text-[20px] lato-bold text-[#036]">Login</h1>
-            </div>
-            <button
-              class="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center"
-              onClick={() => navigate(Routes.SignUp1)}
-            >
-              <h1 class="text-[15px] text-[#fff] lato-bold">Sign Up</h1>
-            </button>
+        <div class="flex flex-wrap gap-10 pt-5 cursor-pointer justify-center">
+          <h1
+            class="text-[15px] lato-bold text-[#036]"
+            onClick={() => navigate(Routes.Homepage)}
+          >
+            Home
+          </h1>
+          <h1
+            class="text-[15px] lato-bold text-[#036]"
+            onClick={() => navigate(Routes.Homepage)}
+          >
+            Service
+          </h1>
+          <h1
+            class="text-[15px] lato-bold text-[#036]"
+            onClick={() => navigate(Routes.Homepage)}
+          >
+            FAQs
+          </h1>
+          <h1
+            class="text-[15px] lato-bold text-[#036]"
+            onClick={() => navigate(Routes.Homepage)}
+          >
+            Contact
+          </h1>
+        </div>
+        <div class="flex gap-10 cursor-pointer pt-5">
+          <div onClick={() => navigate(Routes.SignIn)}>
+            <h1 class="text-[20px] lato-bold text-[#036]">Login</h1>
           </div>
+          <button
+            class="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center"
+            onClick={() => navigate(Routes.SignUp1)}
+          >
+            <h1 class="text-[15px] text-[#fff] lato-bold">Sign Up</h1>
+          </button>
         </div>
       </div>
 
@@ -154,7 +174,10 @@ const Homepage = () => {
         <img src={Vasset3} />
       </div>
       <div className=" pb-10 justify-center flex items-center">
-        <button class="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center">
+        <button
+          class="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center"
+          onClick={() => navigate(Routes.SignIn)}
+        >
           <h1 class="text-[15px] text-[#fff] lato-bold">Get Started</h1>
         </button>
       </div>
@@ -175,9 +198,24 @@ const Homepage = () => {
         </div>
         <div>
           <div className="flex gap-5">
-            <h1 className="text-[15px] text-[#fff] lato-regular">About us</h1>
-            <h1 className="text-[15px] text-[#fff] lato-regular">FAQ</h1>
-            <h1 className="text-[15px] text-[#fff] lato-regular">Contact</h1>
+            <h1
+              className="text-[15px] text-[#fff] lato-regular"
+              onClick={() => navigate(Routes.Homepage)}
+            >
+              About us
+            </h1>
+            <h1
+              className="text-[15px] text-[#fff] lato-regular"
+              onClick={() => navigate(Routes.Homepage)}
+            >
+              FAQ
+            </h1>
+            <h1
+              className="text-[15px] text-[#fff] lato-regular"
+              onClick={() => navigate(Routes.Homepage)}
+            >
+              Contact
+            </h1>
           </div>
           <div className="flex gap-10 pt-10 pl-5">
             <div>

@@ -114,10 +114,10 @@ export const AppRoutes = [
 ];
 
 export const renderRoutes = (routes) =>
-  routes.map(({ path, element, isPrivate }) =>
-    isPrivate ? (
-      <ProtectedRoute key={path} path={path} element={element} />
-    ) : (
-      <Route key={path} path={path} element={element} />
-    )
-  );
+  routes.map(({ path, element, isPrivate }) => (
+    <Route
+      key={path}
+      path={path}
+      element={isPrivate ? <ProtectedRoute element={element} /> : element}
+    />
+  ));
