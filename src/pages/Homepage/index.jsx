@@ -122,30 +122,30 @@ const Homepage = () => {
           </div>
         </div>
         <div class="flex flex-wrap gap-10 pt-5 cursor-pointer justify-center">
-          <h1
-            class="text-[15px] lato-bold text-[#036]"
+          <div
+            class="text-[15px] lato-bold text-[#036] cursor-pointer"
             onClick={() => navigate(Routes.Homepage)}
           >
             Home
-          </h1>
-          <h1
-            class="text-[15px] lato-bold text-[#036]"
-            onClick={() => navigate(Routes.Homepage)}
+          </div>
+          <div
+            class="text-[15px] lato-bold text-[#036] cursor-pointer"
+            onClick={() => navigate(Routes.SignIn)}
           >
             Service
-          </h1>
-          <h1
-            class="text-[15px] lato-bold text-[#036]"
-            onClick={() => navigate(Routes.Homepage)}
+          </div>
+          <div
+            class="text-[15px] lato-bold text-[#036] cursor-pointer"
+            onClick={() => navigate(Routes.SignIn)}
           >
             FAQs
-          </h1>
-          <h1
-            class="text-[15px] lato-bold text-[#036]"
-            onClick={() => navigate(Routes.Homepage)}
+          </div>
+          <div
+            class="text-[15px] lato-bold text-[#036] cursor-pointer"
+            onClick={() => navigate(Routes.SignIn)}
           >
             Contact
-          </h1>
+          </div>
         </div>
         <div class="flex gap-10 cursor-pointer pt-5">
           <div onClick={() => navigate(Routes.SignIn)}>
