@@ -14,18 +14,18 @@ import Homepage from "pages/Homepage";
 import ProtectedRoute from "./protectedRoute";
 
 export const Routes = {
-  SignUp1: "/auth/create-account",
-  SignUp2: "/auth/contact-address",
-  SignUp3: "/auth/next-of-kin",
-  SignUp4: "/auth/identification",
-  SignIn: "/auth/login",
-  Dashboard: "/app/dashboard",
-  TrustFund: "/app/trustfund",
-  Loan: "/app/loan",
-  Assets: "/app/assets",
-  Profile: "/app/profile",
-  Invest: "/app/invest",
-  Transactions: "/app/transactions",
+  SignUp1: "/create-account",
+  SignUp2: "/contact-address",
+  SignUp3: "/next-of-kin",
+  SignUp4: "/identification",
+  SignIn: "/login",
+  Dashboard: "/dashboard",
+  TrustFund: "/trustfund",
+  Loan: "/loan",
+  Assets: "/assets",
+  Profile: "/profile",
+  Invest: "/invest",
+  Transactions: "/transactions",
   Homepage: "/home",
 };
 
