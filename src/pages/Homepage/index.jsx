@@ -145,6 +145,11 @@ const Homepage = () => {
       <div className="p-10 pt-20 justify-center flex items-center">
         <img src={Vasset3} />
       </div>
+      <div className=" pb-10 justify-center flex items-center">
+        <button class="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center">
+          <h1 class="text-[15px] text-[#fff] lato-bold">Get Started</h1>
+        </button>
+      </div>
 
       <div className="flex flex-wrap gap-3 pt-5 p-20 items-start justify-between bg-[#003366] h-[190px]">
         <div>

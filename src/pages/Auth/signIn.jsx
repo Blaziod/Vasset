@@ -54,7 +54,7 @@ const SignIn = () => {
   });
 
   return (
-    <div className="flex bg-[#fff] w-[100vw]">
+    <div className="flex bg-[#fff] w-full">
       <div className="flex flex-wrap justify-start w-[30%]">
         <img src={Vasset} className="h-[100vh]" />
       </div>
