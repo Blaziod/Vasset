@@ -10,15 +10,15 @@ import TrustFund from "pages/TrustFund";
 import Profile from "pages/Profile";
 import Invest from "pages/Invest";
 import Loan from "pages/Loan";
-import ProtectedRoute from "./protectedRoute"; // Update this with the actual path
-import { Component } from "react";
+import Homepage from "pages/Homepage";
+import ProtectedRoute from "./protectedRoute";
 
 export const Routes = {
-  SignUp1: "/signup1",
-  SignUp2: "/signup2",
-  SignUp3: "/signup3",
-  SignUp4: "/signup4",
-  SignIn: "/signin",
+  SignUp1: "/auth/create-account",
+  SignUp2: "/auth/contact-address",
+  SignUp3: "/auth/next-of-kin",
+  SignUp4: "/auth/identification",
+  SignIn: "/auth/login",
   Dashboard: "/app/dashboard",
   TrustFund: "/app/trustfund",
   Loan: "/app/loan",
@@ -26,6 +26,7 @@ export const Routes = {
   Profile: "/app/profile",
   Invest: "/app/invest",
   Transactions: "/app/transactions",
+  Homepage: "/home",
 };
 
 export const AppRoutes = [
@@ -71,6 +72,12 @@ export const AppRoutes = [
     exact: true,
     isPrivate: true,
     component: <Invest />,
+  },
+  {
+    path: Routes.Homepage,
+    exact: true,
+    isPrivate: true,
+    component: <Homepage />,
   },
 
   //Auth Pages

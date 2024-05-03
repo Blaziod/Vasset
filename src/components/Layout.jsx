@@ -459,6 +459,7 @@ const Layout = () => {
     RoutePaths.SignUp3,
     RoutePaths.SignUp4,
     RoutePaths.SignIn,
+    RoutePaths.Homepage,
   ];
 
   return (
@@ -548,7 +549,7 @@ const Layout = () => {
               element={route.component}
             />
           ))}
-          <Route path="*" element={<Navigate to={RoutePaths.Dashboard} />} />
+          <Route path="*" element={<Navigate to={RoutePaths.Homepage} />} />
         </Routes>
       </div>
     </div>
