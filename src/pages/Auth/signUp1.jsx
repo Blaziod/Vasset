@@ -1,16 +1,19 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
-import Vasset from "../../assets/vasset.png";
 import facebook from "../../assets/facebook.png";
 import google from "../../assets/google.png";
 import apple from "../../assets/apple.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Routes } from "routes/routes.config";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { BeatLoader } from "react-spinners";
 
-const validationSchema = yup.object().shape({
+const validationSchema = yup.object({
   firstName: yup.string().required("First name is required"),
   lastName: yup.string().required("Last name is required"),
+  username: yup.string().required("Username is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup
     .string()
@@ -38,12 +41,12 @@ const EyeIcon = () => (
     />
   </svg>
 );
-
 const SignUp1 = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
   const [isConfirmPasswordVisible, setConfirmPasswordVisibility] =
     useState(false);
-  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -52,11 +55,38 @@ const SignUp1 = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      username: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      localStorage.setItem("formValues", JSON.stringify(values));
-      navigate(Routes.SignUp2);
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        const response = await axios.post(
+          "https://api.vassetglobal.com/api/signup",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data: {
+              email: values.email,
+              password: values.password,
+              username: values.username,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          toast.success("Login Successful");
+          navigate(Routes.SignUp2);
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.error("Error signing in:", error);
+        toast.error("An error occurred");
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
@@ -122,6 +152,23 @@ const SignUp1 = () => {
               </div>
               <div className="pt-5">
                 <h1 className="text-[14px] font-lato font-bold text-[#036] pb-[10px]">
+                  Username
+                </h1>
+                <input
+                  type="text"
+                  {...formik.getFieldProps("username")}
+                  className="border-2 border-[#D9E7F0] w-[95%] h-[40px] px-2 rounded-[15px] text-[#000] bg-white"
+                />
+                {formik.touched.username && formik.errors.username ? (
+                  <div
+                    style={{ color: "red", fontSize: 12, fontFamily: "Lato" }}
+                  >
+                    {formik.errors.username}
+                  </div>
+                ) : null}
+              </div>
+              <div className="pt-5">
+                <h1 className="text-[14px] font-lato font-bold text-[#036] pb-[10px]">
                   Email
                 </h1>
                 <input
@@ -137,6 +184,7 @@ const SignUp1 = () => {
                   </div>
                 ) : null}
               </div>
+
               <div className="pt-5">
                 <h1 className="text-[14px] font-lato font-bold text-[#036] pb-[10px]">
                   Password
@@ -146,6 +194,7 @@ const SignUp1 = () => {
                     type={isPasswordVisible ? "text" : "password"}
                     {...formik.getFieldProps("password")}
                     className="border-2 border-[#D9E7F0] w-[95%] h-[40px] px-2 rounded-[15px] bg-white text-[#000]"
+                    typeof="password"
                   />
                   <i
                     onClick={() => setPasswordVisibility(!isPasswordVisible)}
@@ -205,9 +254,16 @@ const SignUp1 = () => {
               <div className="flex justify-center items-center">
                 <button
                   type="submit"
+                  disabled={isLoading}
                   className="bg-[#036] text-[#fff] w-[90%] h-[40px] rounded-[50px] mt-[20px] flex font-lato justify-center items-center"
                 >
-                  Next
+                  {isLoading ? (
+                    <BeatLoader color={"#ffffff"} />
+                  ) : (
+                    <h1 className="text-[24px] font-lato font-bold text-[#fff]">
+                      Next
+                    </h1>
+                  )}
                 </button>
               </div>
             </div>

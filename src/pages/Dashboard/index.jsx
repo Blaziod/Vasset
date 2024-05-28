@@ -1,73 +1,220 @@
-import Img from "assets/Ellipse 11.png";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Routes as RoutePaths } from "routes/routes.config";
+import {
+  DashboardImage,
+  AssetImage,
+  LoanImage,
+  TransactionsImage,
+  VassetName,
+  VassetLogo,
+  InvestImage,
+  TrustImage,
+  ProfileImage,
+  SupportImage,
+  LogoutImage,
+} from "components/Svg";
 
 const Dashboard = () => {
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const Menu = () => {
+    return (
+      <div className="w-[300px] h-full bg-white shadow-[50px] flex flex-col rounded-tr-[50px] rounded-bl-lg">
+        <div className="pl-10">
+          <div
+            className="flex gap-1 pt-10 pb-10 items-center"
+            onClick={() => setIsMenuVisible(false)}
+          >
+            <DashboardImage />
+            <NavLink to={RoutePaths.Dashboard}>
+              <h1 className="font-bold text-[#036] text-[15px]">Dashboard</h1>
+            </NavLink>
+          </div>
+          <div
+            className="flex gap-1 pb-10 items-center"
+            onClick={() => setIsMenuVisible(false)}
+          >
+            <AssetImage />
+            <NavLink to={RoutePaths.Assets}>
+              <h1 className="font-bold text-[#036] text-[15px]">Assets</h1>
+            </NavLink>
+          </div>
+          <div
+            className="flex gap-1 pb-10 items-center"
+            onClick={() => setIsMenuVisible(false)}
+          >
+            <TransactionsImage />
+            <NavLink to={RoutePaths.Transactions}>
+              <h1 className="font-bold text-[#036] text-[15px]">
+                Transactions
+              </h1>
+            </NavLink>
+          </div>
+          <div
+            className="flex gap-1 pb-10 items-center"
+            onClick={() => setIsMenuVisible(false)}
+          >
+            <InvestImage />
+            <NavLink to={RoutePaths.Invest}>
+              <h1 className="font-bold text-[#036] text-[15px]">Invest</h1>
+            </NavLink>
+          </div>
+          <div
+            className="flex gap-1 pb-10 items-center"
+            onClick={() => setIsMenuVisible(false)}
+          >
+            <LoanImage />
+            <NavLink to={RoutePaths.Loan}>
+              <h1 className="font-bold text-[#036] text-[15px]">Loan</h1>
+            </NavLink>
+          </div>
+          <div
+            className="flex gap-1 pb-10 items-center"
+            onClick={() => setIsMenuVisible(false)}
+          >
+            <TrustImage />
+            <NavLink to={RoutePaths.TrustFund}>
+              <h1 className="font-bold text-[#036] text-[15px]">Trust Fund</h1>
+            </NavLink>
+          </div>
+          <div
+            className="flex gap-1 pb-10 items-center"
+            onClick={() => setIsMenuVisible(false)}
+          >
+            <ProfileImage />
+            <NavLink to={RoutePaths.Profile}>
+              <h1 className="font-bold text-[#036] text-[15px]">Profile</h1>
+            </NavLink>
+          </div>
+          <div className="pt-20 mt-9">
+            <div
+              className="flex gap-1 pb-5 items-center"
+              onClick={() => setIsMenuVisible(false)}
+            >
+              <SupportImage />
+              <NavLink to={RoutePaths.Profile}>
+                <h1 className="font-bold text-[#036] text-[15px]">Support</h1>
+              </NavLink>
+            </div>
+            <div
+              className="flex gap-1 items-center"
+              onClick={() => setIsMenuVisible(false)}
+            >
+              <LogoutImage />
+              <NavLink to={RoutePaths.Profile}>
+                <h1 className="font-bold text-[#EB5757] text-[15px]">Logout</h1>
+              </NavLink>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className="">
-      <div className="flex p-5 justify-between">
-        <h1 className="text-[25px] text-[#036] lato-bold">
-          Good Afternoon, Tim
-        </h1>
-        <div className="flex gap-2">
-          <div className="flex gap-1 justify-center items-center bg-custom-blue pl-1 pr-1 h-auto rounded-[15px]">
-            <h1 className="text-[#007A86] lato-regular text-[12px]">Help</h1>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 30 30"
-              fill="none"
-            >
-              <path
-                d="M13.7113 17.3773C13.7113 17.4629 13.7807 17.5321 13.8662 17.5321H15.4939C15.5794 17.5321 15.6488 17.4629 15.6488 17.3773C15.6527 16.9563 15.7012 16.6027 15.7943 16.3168C15.8913 16.0268 16.0387 15.7745 16.2364 15.56C16.4382 15.3456 16.6962 15.139 17.0103 14.9404C17.3672 14.722 17.6755 14.4737 17.9354 14.1956C18.1953 13.9176 18.3952 13.5999 18.5348 13.2424C18.6783 12.8849 18.75 12.4797 18.75 12.0269C18.75 11.3557 18.591 10.7757 18.2729 10.2872C17.9588 9.79465 17.5184 9.41531 16.9522 9.14919C16.3897 8.88306 15.738 8.75 14.9972 8.75C14.3183 8.75 13.6977 8.8771 13.1352 9.13131C12.5767 9.38552 12.1267 9.76684 11.7853 10.2753C11.6205 10.5235 11.4937 10.8012 11.4047 11.1082C11.2406 11.6745 11.7362 12.1699 12.3259 12.1699H12.3486C12.8938 12.1699 13.2899 11.7023 13.589 11.2464C13.752 11.0002 13.9557 10.8175 14.2 10.6983C14.4483 10.5752 14.71 10.5136 14.9855 10.5136C15.2842 10.5136 15.5538 10.5771 15.7943 10.7042C16.0387 10.8313 16.2325 11.0101 16.3762 11.2405C16.5197 11.4708 16.5914 11.7429 16.5914 12.0567C16.5914 12.3348 16.537 12.587 16.4284 12.8134C16.3199 13.0359 16.1705 13.2384 15.9804 13.4211C15.7943 13.5999 15.5829 13.7647 15.3463 13.9156C15.001 14.1341 14.7082 14.3744 14.4677 14.6365C14.2272 14.8947 14.0409 15.2364 13.909 15.6614C13.781 16.0864 13.7152 16.6584 13.7113 17.3773Z"
-                fill="#007A86"
-              />
-              <path
-                d="M13.8217 20.8689C14.0739 21.1231 14.3745 21.2502 14.7236 21.2502C14.9564 21.2502 15.1677 21.1926 15.3579 21.0775C15.5517 20.9582 15.707 20.7994 15.8234 20.6009C15.9435 20.4022 16.0036 20.1817 16.0036 19.9395C16.0036 19.582 15.8756 19.2761 15.6196 19.022C15.3675 18.7677 15.0689 18.6406 14.7236 18.6406C14.3745 18.6406 14.0739 18.7677 13.8217 19.022C13.5696 19.2761 13.4435 19.582 13.4435 19.9395C13.4435 20.3049 13.5696 20.6148 13.8217 20.8689Z"
-                fill="#007A86"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M27.5 15C27.5 21.9035 21.9035 27.5 15 27.5C8.09644 27.5 2.5 21.9035 2.5 15C2.5 8.09644 8.09644 2.5 15 2.5C21.9035 2.5 27.5 8.09644 27.5 15ZM25.625 15C25.625 20.868 20.868 25.625 15 25.625C9.13198 25.625 4.375 20.868 4.375 15C4.375 9.13198 9.13198 4.375 15 4.375C20.868 4.375 25.625 9.13198 25.625 15Z"
-                fill="#007A86"
-              />
-            </svg>
+    <div className="h-full">
+      <div>
+        <div className="pl-5 pt-2">
+          <h1 className="text-[15px] text-[#036] lato-regular">
+            Current Balance
+          </h1>
+          <h1 className="text-[25px] text-[#000] lato-bold">0 USD</h1>
+        </div>
+
+        <div className="p-5">
+          <div className="bg-white h-[360px] rounded-md p-3">
+            <div className=" flex justify-between">
+              <h1 className="text-[18px] text-[#036] lato-regular">
+                My Portfolio
+              </h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="29"
+                height="25"
+                viewBox="0 0 29 25"
+                fill="none"
+              >
+                <ellipse
+                  cx="6.61124"
+                  cy="6.36236"
+                  rx="6.61124"
+                  ry="6.36236"
+                  transform="matrix(0.952028 0.306012 -0.406852 0.913494 11.1768 5.41113)"
+                  fill="#009999"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M26.5837 12.6314C26.5837 8.79379 26.5837 6.87498 25.6124 5.44576C24.976 4.50946 24.0608 3.73195 22.9587 3.19138C21.2763 2.36621 19.0177 2.36621 14.5003 2.36621C9.98302 2.36621 7.72435 2.36621 6.04199 3.19138C4.93985 3.73195 4.02463 4.50946 3.38831 5.44576C2.41699 6.87498 2.41699 8.79379 2.41699 12.6314C2.41699 16.469 2.41699 18.3878 3.38831 19.817C4.02463 20.7533 4.93985 21.5308 6.04199 22.0714C7.72435 22.8966 9.98302 22.8966 14.5003 22.8966C19.0177 22.8966 21.2763 22.8966 22.9587 22.0714C24.0608 21.5308 24.976 20.7533 25.6124 19.817C26.5837 18.3878 26.5837 16.469 26.5837 12.6314ZM12.6512 16.1931C12.2973 16.4938 12.2973 16.9811 12.6512 17.2818C13.0051 17.5825 13.5788 17.5825 13.9328 17.2818L17.0573 14.6274C18.355 13.5251 18.355 11.7377 17.0573 10.6353L13.9328 7.98092C13.5788 7.68026 13.0051 7.68026 12.6512 7.98092C12.2973 8.28158 12.2973 8.76905 12.6512 9.06971L15.7757 11.724C16.3655 12.2252 16.3655 13.0376 15.7757 13.5387L12.6512 16.1931Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+            <div className="flex justify-center align-middle pl-10 pt-20 pr-10">
+              <h1 className="text-[15px] text-[#007A86] lato-regular text-center">
+                You do not yet have any asset/cryptocurrency in your Portfolio
+              </h1>
+            </div>
           </div>
-          <div className="justify-center items-center flex">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 30 30"
-              fill="none"
-            >
-              <rect
-                width="30"
-                height="30"
-                rx="15"
-                fill="#005C99"
-                fill-opacity="0.05"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M13.1607 4.01109C9.23373 4.9789 6.32145 8.52471 6.32145 12.7504V14.375C6.32145 16.5814 5.63455 19.3454 4.97079 21.5011C4.44908 23.1954 5.68543 25 7.45829 25H12.5C12.5 25.3283 12.5647 25.6534 12.6903 25.9567C12.8159 26.26 13.0002 26.5356 13.2323 26.7677C13.4644 26.9999 13.74 27.184 14.0433 27.3097C14.3467 27.4354 14.6718 27.5 15 27.5C15.3283 27.5 15.6534 27.4354 15.9568 27.3097C16.26 27.184 16.5357 26.9999 16.7678 26.7677C16.9999 26.5356 17.184 26.26 17.3098 25.9567C17.4354 25.6534 17.5 25.3283 17.5 25H22.8868C24.5624 25 25.7793 23.3799 25.3964 21.7486C24.8803 19.5501 24.3214 16.6451 24.3214 14.375V12.7504C24.3214 8.28563 21.0703 4.57984 16.8063 3.87191C16.786 3.79915 16.7613 3.72754 16.7323 3.65746C16.638 3.42999 16.4999 3.22329 16.3259 3.04918C16.1518 2.87506 15.945 2.73695 15.7175 2.64273C15.49 2.5485 15.2463 2.5 15 2.5C14.7538 2.5 14.51 2.5485 14.2825 2.64273C14.055 2.73695 13.8483 2.87506 13.6742 3.04918C13.5002 3.22329 13.362 3.42999 13.2678 3.65746C13.2204 3.7718 13.1845 3.89026 13.1607 4.01109ZM8.19645 12.7504V14.375C8.19645 16.8801 7.43437 19.8716 6.76277 22.0529C6.68369 22.3096 6.73333 22.5874 6.88859 22.8085C7.03932 23.0231 7.24328 23.125 7.45829 23.125H22.8868C23.2853 23.125 23.6935 22.6992 23.571 22.1771C23.0508 19.9609 22.4464 16.8765 22.4464 14.375V12.7504C22.4464 8.81528 19.2564 5.625 15.3214 5.625C11.3865 5.625 8.19645 8.81528 8.19645 12.7504Z"
-                fill="#007A86"
-              />
-              <circle
-                cx="21.5"
-                cy="7.5"
-                r="3"
-                fill="#EB5757"
-                stroke="#E9EEF1"
-              />
-            </svg>
+        </div>
+        <div className="p-5">
+          <div className="bg-white h-[360px] rounded-md p-3">
+            <div className=" flex justify-center">
+              <h1 className="text-[28px] text-[#036] lato-bold">Analytics</h1>
+            </div>
+            <div className="flex justify-center align-middle pl-10 pt-20 pr-10">
+              <h1 className="text-[15px] text-[#007A86] lato-regular text-center">
+                Analytics currently unavailable
+              </h1>
+            </div>
           </div>
-          <div>
-            <img src={Img} />
+        </div>
+        <div className="p-5">
+          <div className="bg-white h-[360px] rounded-md p-3">
+            <div className=" flex justify-between">
+              <h1 className="text-[18px] text-[#036] lato-regular">
+                My Portfolio
+              </h1>
+              <div className="flex gap-1">
+                <h1 className="text-[12px] lato-regular text-[#036]">1hr</h1>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M5.09473 8.08236C4.76933 7.75696 4.24174 7.75695 3.91634 8.08236C3.59094 8.40776 3.59094 8.93534 3.91634 9.26074L6.69454 12.0389C8.52208 13.8665 11.482 13.8765 13.3218 12.0613L16.0755 9.34464C16.4031 9.02143 16.4067 8.49385 16.0835 8.16619C15.7603 7.83853 15.2327 7.83485 14.905 8.15799L12.7415 10.2914C11.2263 11.7855 8.78935 11.777 7.28466 10.2723L5.09473 8.08236Z"
+                    fill="#333333"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="flex justify-center align-middle pl-10 pt-20 pr-10">
+              <h1 className="text-[15px] text-[#007A86] lato-regular text-center">
+                You do not yet have any asset/cryptocurrency in your Portfolio
+              </h1>
+            </div>
           </div>
-          <div className="flex justify-center items-center">
-            <h1 className="text-[13px] text-[#000] lato-bold">Tomahawk Tim</h1>
+        </div>
+        <div className="p-5">
+          <div className="bg-white h-[360px] rounded-md p-3">
+            <div className=" flex justify-between">
+              <h1 className="text-[18px] text-[#036] lato-regular">
+                Recent Transactions
+              </h1>
+              <div className="flex gap-1">
+                <h1 className="text-[12px] lato-regular text-[#036]">
+                  View All
+                </h1>
+              </div>
+            </div>
+            <div className="flex justify-center align-middle pl-10 pt-20 pr-10">
+              <h1 className="text-[15px] text-[#007A86] lato-regular text-center">
+                No transactions available yet, carry out a transaction to view
+              </h1>
+            </div>
           </div>
         </div>
       </div>

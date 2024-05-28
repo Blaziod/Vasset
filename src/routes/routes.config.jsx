@@ -12,6 +12,7 @@ import Invest from "pages/Invest";
 import Loan from "pages/Loan";
 import Homepage from "pages/Homepage";
 import ProtectedRoute from "./protectedRoute";
+import Support from "pages/Support";
 
 export const Routes = {
   SignUp1: "/create-account",
@@ -27,6 +28,7 @@ export const Routes = {
   Invest: "/invest",
   Transactions: "/transactions",
   Homepage: "/home",
+  Support: "/support",
 };
 
 export const AppRoutes = [
@@ -78,6 +80,12 @@ export const AppRoutes = [
     exact: true,
     isPrivate: true,
     component: <Homepage />,
+  },
+  {
+    path: Routes.Support,
+    exact: true,
+    isPrivate: true,
+    component: <Support />,
   },
 
   //Auth Pages

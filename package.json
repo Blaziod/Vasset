@@ -7,14 +7,18 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "autoprefixer": "^10.4.19",
+    "axios": "^1.7.2",
     "formik": "^2.4.6",
     "postcss": "^8.4.38",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.4.1",
     "react-phone-number-input": "^3.4.1",
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "tailwindcss": "^3.4.3",
+    "toast": "^0.5.4",
     "web-vitals": "^2.1.0",
     "yup": "^1.4.0"
   },
@@ -24,7 +28,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "tailwind build src/styles.css -o dist/styles.css"
-    
   },
   "browserslist": {
     "production": [

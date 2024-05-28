@@ -1,15 +1,4 @@
-import React, { useState } from "react";
-import {
-  Routes,
-  Route,
-  NavLink,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
-import UserContext from "context/UserContext";
-import { AppRoutes, Routes as RoutePaths } from "routes/routes.config";
-
-const AssetImage = () => {
+export const AssetImage = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +37,7 @@ const AssetImage = () => {
     </svg>
   );
 };
-const DashboardImage = () => {
+export const DashboardImage = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +74,7 @@ const DashboardImage = () => {
   );
 };
 
-const VassetName = () => {
+export const VassetName = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +100,7 @@ const VassetName = () => {
   );
 };
 
-const VassetLogo = () => {
+export const VassetLogo = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +126,7 @@ const VassetLogo = () => {
   );
 };
 
-const LogoutImage = () => {
+export const LogoutImage = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +165,7 @@ const LogoutImage = () => {
   );
 };
 
-const TransactionsImage = () => {
+export const TransactionsImage = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -231,7 +220,7 @@ const TransactionsImage = () => {
   );
 };
 
-const InvestImage = () => {
+export const InvestImage = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -286,7 +275,7 @@ const InvestImage = () => {
     </svg>
   );
 };
-const LoanImage = () => {
+export const LoanImage = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -342,7 +331,7 @@ const LoanImage = () => {
   );
 };
 
-const SupportImage = () => {
+export const SupportImage = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -378,7 +367,7 @@ const SupportImage = () => {
     </svg>
   );
 };
-const TrustImage = () => {
+export const TrustImage = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -415,7 +404,7 @@ const TrustImage = () => {
     </svg>
   );
 };
-const ProfileImage = () => {
+export const ProfileImage = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -450,210 +439,3 @@ const ProfileImage = () => {
     </svg>
   );
 };
-const Layout = () => {
-  const { userInfo } = React.useContext(UserContext);
-  const location = useLocation();
-  const authRoutes = [
-    RoutePaths.SignUp1,
-    RoutePaths.SignUp2,
-    RoutePaths.SignUp3,
-    RoutePaths.SignUp4,
-    RoutePaths.SignIn,
-    RoutePaths.Homepage,
-  ];
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuVisible((prevState) => !prevState);
-  };
-  const Menu = () => {
-    return (
-      <div className="w-[200px] h-full bg-white shadow-[50px] flex flex-col rounded-tr-[50px] rounded-bl-lg">
-        <div className="pl-10">
-          <div
-            className="flex gap-1 pt-10 pb-10 items-center"
-            onClick={() => setIsMenuVisible(false)}
-          >
-            <DashboardImage />
-            <NavLink to={RoutePaths.Dashboard}>
-              <h1 className="font-bold text-[#036] text-[15px]">Dashboard</h1>
-            </NavLink>
-          </div>
-          <div
-            className="flex gap-1 pb-10 items-center"
-            onClick={() => setIsMenuVisible(false)}
-          >
-            <AssetImage />
-            <NavLink to={RoutePaths.Assets}>
-              <h1 className="font-bold text-[#036] text-[15px]">Assets</h1>
-            </NavLink>
-          </div>
-          <div
-            className="flex gap-1 pb-10 items-center"
-            onClick={() => setIsMenuVisible(false)}
-          >
-            <TransactionsImage />
-            <NavLink to={RoutePaths.Transactions}>
-              <h1 className="font-bold text-[#036] text-[15px]">
-                Transactions
-              </h1>
-            </NavLink>
-          </div>
-          <div
-            className="flex gap-1 pb-10 items-center"
-            onClick={() => setIsMenuVisible(false)}
-          >
-            <InvestImage />
-            <NavLink to={RoutePaths.Invest}>
-              <h1 className="font-bold text-[#036] text-[15px]">Invest</h1>
-            </NavLink>
-          </div>
-          <div
-            className="flex gap-1 pb-10 items-center"
-            onClick={() => setIsMenuVisible(false)}
-          >
-            <LoanImage />
-            <NavLink to={RoutePaths.Loan}>
-              <h1 className="font-bold text-[#036] text-[15px]">Loan</h1>
-            </NavLink>
-          </div>
-          <div
-            className="flex gap-1 pb-10 items-center"
-            onClick={() => setIsMenuVisible(false)}
-          >
-            <TrustImage />
-            <NavLink to={RoutePaths.TrustFund}>
-              <h1 className="font-bold text-[#036] text-[15px]">Trust Fund</h1>
-            </NavLink>
-          </div>
-          <div
-            className="flex gap-1 pb-10 items-center"
-            onClick={() => setIsMenuVisible(false)}
-          >
-            <ProfileImage />
-            <NavLink to={RoutePaths.Profile}>
-              <h1 className="font-bold text-[#036] text-[15px]">Profile</h1>
-            </NavLink>
-          </div>
-          <div className="pt-20 mt-9">
-            <div
-              className="flex gap-1 pb-5 items-center"
-              onClick={() => setIsMenuVisible(false)}
-            >
-              <SupportImage />
-              <NavLink to={RoutePaths.Support}>
-                <h1 className="font-bold text-[#036] text-[15px]">Support</h1>
-              </NavLink>
-            </div>
-            <div
-              className="flex gap-1 items-center"
-              onClick={() => setIsMenuVisible(false)}
-            >
-              <LogoutImage />
-              <NavLink to={RoutePaths.Profile}>
-                <h1 className="font-bold text-[#EB5757] text-[15px]">Logout</h1>
-              </NavLink>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-  return (
-    <div className="w-full h-full">
-      {!authRoutes.includes(location.pathname) && (
-        <div className="flex bg-white pt-5 pb-5 justify-between place-items-start pr-5 pl-5">
-          <div className="flex">
-            <div>
-              <VassetLogo />
-            </div>
-            <div>
-              <VassetName />
-            </div>{" "}
-          </div>
-          <div className="flex gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              viewBox="0 0 30 30"
-              fill="none"
-            >
-              <rect
-                width="30"
-                height="30"
-                rx="15"
-                fill="#005C99"
-                fill-opacity="0.05"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M13.1609 4.01109C9.23397 4.9789 6.3217 8.52471 6.3217 12.7504V14.375C6.3217 16.5814 5.6348 19.3454 4.97104 21.5011C4.44932 23.1954 5.68567 25 7.45854 25H12.5003C12.5003 25.3283 12.5649 25.6534 12.6905 25.9567C12.8161 26.26 13.0004 26.5356 13.2325 26.7677C13.4646 26.9999 13.7403 27.184 14.0435 27.3097C14.3469 27.4354 14.672 27.5 15.0003 27.5C15.3285 27.5 15.6536 27.4354 15.957 27.3097C16.2603 27.184 16.5359 26.9999 16.768 26.7677C17.0001 26.5356 17.1843 26.26 17.31 25.9567C17.4356 25.6534 17.5003 25.3283 17.5003 25H22.887C24.5626 25 25.7795 23.3799 25.3967 21.7486C24.8805 19.5501 24.3216 16.6451 24.3216 14.375V12.7504C24.3216 8.28563 21.0705 4.57984 16.8065 3.87191C16.7863 3.79915 16.7615 3.72754 16.7325 3.65746C16.6383 3.42999 16.5001 3.22329 16.3261 3.04918C16.152 2.87506 15.9453 2.73695 15.7178 2.64273C15.4903 2.5485 15.2465 2.5 15.0003 2.5C14.754 2.5 14.5103 2.5485 14.2828 2.64273C14.0553 2.73695 13.8485 2.87506 13.6744 3.04918C13.5004 3.22329 13.3623 3.42999 13.268 3.65746C13.2206 3.7718 13.1848 3.89026 13.1609 4.01109ZM8.1967 12.7504V14.375C8.1967 16.8801 7.43461 19.8716 6.76301 22.0529C6.68394 22.3096 6.73357 22.5874 6.88884 22.8085C7.03956 23.0231 7.24352 23.125 7.45854 23.125H22.887C23.2855 23.125 23.6938 22.6992 23.5713 22.1771C23.051 19.9609 22.4466 16.8765 22.4466 14.375V12.7504C22.4466 8.81528 19.2566 5.625 15.3216 5.625C11.3868 5.625 8.1967 8.81528 8.1967 12.7504Z"
-                fill="#007A86"
-              />
-              <circle
-                cx="21.5"
-                cy="7.5"
-                r="3"
-                fill="#EB5757"
-                stroke="#E9EEF1"
-              />
-            </svg>
-            <div>
-              <img src="" />
-            </div>
-            <div onClick={toggleMenu}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="27"
-                height="27"
-                viewBox="0 0 27 27"
-                fill="none"
-              >
-                <path
-                  d="M3.375 7.875H23.625"
-                  stroke="#292D32"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M3.375 13.5H23.625"
-                  stroke="#292D32"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M3.375 19.125H23.625"
-                  stroke="#292D32"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      )}
-      {isMenuVisible ? (
-        <div className="h-full">
-          <Menu />
-        </div>
-      ) : (
-        <div className="bg-[#F5F5F5] w-full">
-          <Routes>
-            {AppRoutes.map((route) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                element={route.component}
-              />
-            ))}
-            <Route path="*" element={<Navigate to={RoutePaths.Homepage} />} />
-          </Routes>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default Layout;
