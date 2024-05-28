@@ -12,8 +12,6 @@ import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
 
 const validationSchema = yup.object().shape({
-  firstName: yup.string().required("First name is required"),
-  lastName: yup.string().required("Last name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup
     .string()
@@ -41,55 +39,42 @@ const EyeIcon = () => (
 const SignIn = () => {
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSignIn = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.post(
-        "https://api.vassetglobal.com/api/login",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          data: {
-            email_username: email,
-            password: password,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        setEmail("");
-        setPassword("");
-        console.log("Success signing in:", response.data);
-        toast.success("Login Successful");
-      } else {
-        console.error("Error signing in:", response.data);
-        toast.error(response.data.message);
-      }
-    } catch (error) {
-      console.error("Error signing in:", error);
-      toast.error("An error occurred");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        const response = await axios.post(
+          "https://api.vassetglobal.com/api/login",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data: {
+              email: values.email,
+              password: values.password,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          toast.success("Login Successful");
+          navigate(Routes.Dashboard);
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.error("Error signing in:", error);
+        toast.error("An error occurred");
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
@@ -123,10 +108,6 @@ const SignIn = () => {
                   {...formik.getFieldProps("email")}
                   className="border-2 border-[#D9E7F0] w-[95%] h-[50px] px-2 rounded-[15px] text-[#000] bg-white "
                   style={{ paddingLeft: "60px" }}
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -162,8 +143,6 @@ const SignIn = () => {
                     type={isPasswordVisible ? "text" : "password"}
                     {...formik.getFieldProps("password")}
                     className="border-2 border-[#D9E7F0] h-[50px] px-2 w-[95%] rounded-[15px] bg-white text-[#000]"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                     typeof="password"
                   />
                   <i
@@ -191,7 +170,6 @@ const SignIn = () => {
                 <button
                   type="submit"
                   className="bg-[#036] text-[#fff]  h-[50px] rounded-[50px] w-[80%] mt-10 font-lato text-[24px] text-center"
-                  onClick={handleSignIn}
                   disabled={isLoading}
                 >
                   {isLoading ? (

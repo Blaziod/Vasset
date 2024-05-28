@@ -251,7 +251,7 @@ const SignUp1 = () => {
                   </div>
                 ) : null}
               </div>
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-center pb-[30px]">
                 <button
                   type="submit"
                   disabled={isLoading}
