@@ -15,15 +15,51 @@ import Loan from "pages/Loan";
 import Homepage from "pages/Homepage";
 import ProtectedRoute from "./protectedRoute";
 import Support from "pages/Support";
+import UnProtectedRoute from "./unprotectedRoute";
 
 const AppRouter = () => {
   return (
     <RouterRoutes>
-      <Route path="/login" element={<SignIn />} />
-      <Route path="/create-account" element={<SignUp1 />} />
-      <Route path="/contact-address" element={<SignUp2 />} />
-      <Route path="/next-of-kin" element={<SignUp3 />} />
-      <Route path="/identification" element={<SignUp4 />} />
+      <Route
+        path="/login"
+        element={
+          <UnProtectedRoute>
+            <SignIn />
+          </UnProtectedRoute>
+        }
+      />
+      <Route
+        path="/create-account"
+        element={
+          <UnProtectedRoute>
+            <SignUp1 />
+          </UnProtectedRoute>
+        }
+      />
+      <Route
+        path="/contact-address"
+        element={
+          <UnProtectedRoute>
+            <SignUp2 />
+          </UnProtectedRoute>
+        }
+      />
+      <Route
+        path="/next-of-kin"
+        element={
+          <UnProtectedRoute>
+            <SignUp3 />
+          </UnProtectedRoute>
+        }
+      />
+      <Route
+        path="/identification"
+        element={
+          <UnProtectedRoute>
+            <SignUp4 />
+          </UnProtectedRoute>
+        }
+      />
       <Route path="/home" element={<Homepage />} />
 
       {/* Protected routes wrapped in ProtectedRoute component */}
