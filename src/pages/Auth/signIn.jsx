@@ -6,11 +6,11 @@ import google from "assets/google.png";
 import apple from "assets/apple.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "routes/routes.config";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
 import { errorMessage } from "utils/error-message";
+import { useAuth } from "context/AuthContext";
 
 const validationSchema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -41,6 +41,7 @@ const SignIn = () => {
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -66,7 +67,8 @@ const SignIn = () => {
 
         if (response.status === 200) {
           toast.success("Login Successful");
-          navigate(Routes.Dashboard);
+          login(response.data.access_token);
+          navigate("/dashboard");
         } else {
           toast.error(response.data.message);
         }
@@ -184,14 +186,14 @@ const SignIn = () => {
               </div>
               <div
                 className="flex pt-5 justify-center items-center"
-                onClick={() => navigate(Routes.SignUp1)}
+                onClick={() => navigate("/create-account")}
               >
                 <h1 className="text-[20px] font-lato text-[#000]">
                   Don’t have an account?
                 </h1>
                 <button
                   className="text-[20px] font-lato text-[#000] font-bold underline bg-white"
-                  onClick={() => navigate(Routes.SignUp1)}
+                  onClick={() => navigate("/create-account")}
                 >
                   Sign up
                 </button>

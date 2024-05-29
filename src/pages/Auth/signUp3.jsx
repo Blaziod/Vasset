@@ -4,7 +4,6 @@ import Vasset from "../../assets/vasset.png";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "routes/routes.config";
 
 // const validationSchema = yup.object().shape({
 //   nextOfKinRelationship: yup
@@ -37,7 +36,7 @@ const SignUp3 = () => {
     },
     onSubmit: (values) => {
       localStorage.setItem("formValues2", JSON.stringify(values));
-      navigate(Routes.SignUp4);
+      navigate("/identification");
     },
   });
 

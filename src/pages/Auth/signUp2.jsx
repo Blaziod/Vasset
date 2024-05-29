@@ -3,7 +3,6 @@ import Vasset from "../../assets/vasset.png";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "routes/routes.config";
 
 const SignUp2 = () => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ const SignUp2 = () => {
     },
     onSubmit: (values) => {
       localStorage.setItem("formValues1", JSON.stringify(values));
-      navigate(Routes.SignUp3);
+      navigate("/next-of-kin");
     },
   });
 

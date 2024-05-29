@@ -1,3 +1,5 @@
+import React from "react";
+import { Route, Routes as RouterRoutes } from "react-router-dom";
 import SignUp1 from "pages/Auth/signUp1";
 import SignIn from "pages/Auth/signIn";
 import SignUp2 from "pages/Auth/signUp2";
@@ -14,118 +16,83 @@ import Homepage from "pages/Homepage";
 import ProtectedRoute from "./protectedRoute";
 import Support from "pages/Support";
 
-export const Routes = {
-  SignUp1: "/create-account",
-  SignUp2: "/contact-address",
-  SignUp3: "/next-of-kin",
-  SignUp4: "/identification",
-  SignIn: "/login",
-  Dashboard: "/dashboard",
-  TrustFund: "/trustfund",
-  Loan: "/loan",
-  Assets: "/assets",
-  Profile: "/profile",
-  Invest: "/invest",
-  Transactions: "/transactions",
-  Homepage: "/home",
-  Support: "/support",
+const AppRouter = () => {
+  return (
+    <RouterRoutes>
+      <Route path="/login" element={<SignIn />} />
+      <Route path="/create-account" element={<SignUp1 />} />
+      <Route path="/contact-address" element={<SignUp2 />} />
+      <Route path="/next-of-kin" element={<SignUp3 />} />
+      <Route path="/identification" element={<SignUp4 />} />
+      <Route path="/home" element={<Homepage />} />
+
+      {/* Protected routes wrapped in ProtectedRoute component */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/assets"
+        element={
+          <ProtectedRoute>
+            <Assets />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/transactions"
+        element={
+          <ProtectedRoute>
+            <Transactions />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/trustfund"
+        element={
+          <ProtectedRoute>
+            <TrustFund />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/invest"
+        element={
+          <ProtectedRoute>
+            <Invest />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/loan"
+        element={
+          <ProtectedRoute>
+            <Loan />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/support"
+        element={
+          <ProtectedRoute>
+            <Support />
+          </ProtectedRoute>
+        }
+      />
+    </RouterRoutes>
+  );
 };
 
-export const AppRoutes = [
-  //Pages
-  {
-    path: Routes.Dashboard,
-    exact: true,
-    isPrivate: true,
-    component: <Dashboard />,
-  },
-  {
-    path: Routes.Transactions,
-    exact: true,
-    isPrivate: true,
-    component: <Transactions />,
-  },
-  {
-    path: Routes.Profile,
-    exact: true,
-    isPrivate: true,
-    component: <Profile />,
-  },
-  {
-    path: Routes.TrustFund,
-    exact: true,
-    isPrivate: true,
-    component: <TrustFund />,
-  },
-  {
-    path: Routes.Assets,
-    exact: true,
-    isPrivate: true,
-    component: <Assets />,
-  },
-  {
-    path: Routes.Loan,
-    exact: true,
-    isPrivate: true,
-    component: <Loan />,
-  },
-  {
-    path: Routes.Invest,
-    exact: true,
-    isPrivate: true,
-    component: <Invest />,
-  },
-  {
-    path: Routes.Homepage,
-    exact: true,
-    isPrivate: true,
-    component: <Homepage />,
-  },
-  {
-    path: Routes.Support,
-    exact: true,
-    isPrivate: true,
-    component: <Support />,
-  },
-
-  //Auth Pages
-  {
-    path: Routes.SignUp1,
-    exact: true,
-    isPrivate: false,
-    component: <SignUp1 />,
-  },
-  {
-    path: Routes.SignUp2,
-    exact: true,
-    isPrivate: false,
-    component: <SignUp2 />,
-  },
-  {
-    path: Routes.SignUp3,
-    exact: true,
-    isPrivate: false,
-    component: <SignUp3 />,
-  },
-  {
-    path: Routes.SignUp4,
-    exact: true,
-    isPrivate: false,
-    component: <SignUp4 />,
-  },
-  {
-    path: Routes.SignIn,
-    exact: true,
-    isPrivate: true,
-    component: <SignIn />,
-  },
-];
-
-export const renderRoutes = (routes) =>
-  routes.map(({ path, element, isPrivate }) => (
-    <Route
-      key={path}
-      path={path}
-      element={isPrivate ? <ProtectedRoute element={element} /> : element}
-    />
-  ));
+export default AppRouter;

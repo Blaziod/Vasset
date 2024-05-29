@@ -3,7 +3,6 @@ import * as yup from "yup";
 import Vasset from "../../assets/vasset.png";
 import "react-phone-number-input/style.css";
 import { useState } from "react";
-import { Routes } from "routes/routes.config";
 import { useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object().shape({
@@ -55,7 +54,7 @@ const SignUp4 = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      navigate(Routes.Dashboard);
+      navigate("/dashboard");
     },
   });
 

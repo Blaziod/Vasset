@@ -1,20 +1,15 @@
-import React, { useEffect } from "react";
-import { Route, useNavigate } from "react-router-dom";
-import AuthContext from "context/AuthContext";
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "context/AuthContext";
 
-const ProtectedRoute = ({ path, element, ...rest }) => {
-  const { isAuthenticated } = React.useContext(AuthContext);
-  const navigate = useNavigate();
+const ProtectedRoute = ({ children }) => {
+  const { authToken } = useAuth();
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/signin");
-    }
-  }, [isAuthenticated, navigate]);
+  if (!authToken) {
+    return <Navigate to="/login" replace />;
+  }
 
-  return isAuthenticated ? (
-    <Route path={path} element={element} {...rest} />
-  ) : null;
+  return children;
 };
 
 export default ProtectedRoute;

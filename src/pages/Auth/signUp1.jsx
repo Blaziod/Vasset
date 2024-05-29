@@ -5,7 +5,6 @@ import google from "../../assets/google.png";
 import apple from "../../assets/apple.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "routes/routes.config";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
@@ -79,8 +78,8 @@ const SignUp1 = () => {
         );
 
         if (response.status === 200) {
-          toast.success("Login Successful");
-          navigate(Routes.SignUp2);
+          toast.success("Signup Successful");
+          navigate("/contact-address");
         } else {
           toast.error(response.data.message);
         }

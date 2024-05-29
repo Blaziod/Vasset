@@ -2,7 +2,6 @@ import Vasset from "assets/vassethome.png";
 import Vasset1 from "assets/Vassethome1.png";
 import Vasset2 from "assets/vassethome2.png";
 import Vasset3 from "assets/vh.png";
-import { Routes } from "routes/routes.config";
 import { useNavigate } from "react-router-dom";
 
 const VassetName = () => {
@@ -124,36 +123,36 @@ const Homepage = () => {
         <div class="flex flex-wrap gap-10 pt-5 cursor-pointer justify-center">
           <div
             class="text-[15px] lato-bold text-[#036] cursor-pointer"
-            onClick={() => navigate(Routes.Homepage)}
+            onClick={() => navigate("/home")}
           >
             Home
           </div>
           <div
             class="text-[15px] lato-bold text-[#036] cursor-pointer"
-            onClick={() => navigate(Routes.SignIn)}
+            onClick={() => navigate("/login")}
           >
             Service
           </div>
           <div
             class="text-[15px] lato-bold text-[#036] cursor-pointer"
-            onClick={() => navigate(Routes.SignIn)}
+            onClick={() => navigate("/login")}
           >
             FAQs
           </div>
           <div
             class="text-[15px] lato-bold text-[#036] cursor-pointer"
-            onClick={() => navigate(Routes.SignIn)}
+            onClick={() => navigate("/login")}
           >
             Contact
           </div>
         </div>
         <div class="flex gap-10 cursor-pointer pt-5">
-          <div onClick={() => navigate(Routes.SignIn)}>
+          <div onClick={() => navigate("/login")}>
             <h1 class="text-[20px] lato-bold text-[#036]">Login</h1>
           </div>
           <button
             class="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center"
-            onClick={() => navigate(Routes.SignUp1)}
+            onClick={() => navigate("/create-account")}
           >
             <h1 class="text-[15px] text-[#fff] lato-bold">Sign Up</h1>
           </button>
@@ -176,7 +175,7 @@ const Homepage = () => {
       <div className=" pb-10 justify-center flex items-center">
         <button
           class="bg-[#003366] p-5 h-[30px] rounded-[6px] items-center flex justify-center"
-          onClick={() => navigate(Routes.SignIn)}
+          onClick={() => navigate("/create-account")}
         >
           <h1 class="text-[15px] text-[#fff] lato-bold">Get Started</h1>
         </button>
@@ -200,19 +199,19 @@ const Homepage = () => {
           <div className="flex gap-5">
             <h1
               className="text-[15px] text-[#fff] lato-regular"
-              onClick={() => navigate(Routes.Homepage)}
+              onClick={() => navigate("/home")}
             >
               About us
             </h1>
             <h1
               className="text-[15px] text-[#fff] lato-regular"
-              onClick={() => navigate(Routes.Homepage)}
+              onClick={() => navigate("/home")}
             >
               FAQ
             </h1>
             <h1
               className="text-[15px] text-[#fff] lato-regular"
-              onClick={() => navigate(Routes.Homepage)}
+              onClick={() => navigate("/home")}
             >
               Contact
             </h1>
