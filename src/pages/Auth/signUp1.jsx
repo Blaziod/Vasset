@@ -9,6 +9,7 @@ import { Routes } from "routes/routes.config";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
+import { errorMessage } from "utils/error-message";
 
 const validationSchema = yup.object({
   firstName: yup.string().required("First name is required"),
@@ -85,7 +86,7 @@ const SignUp1 = () => {
         }
       } catch (error) {
         console.error("Error signing in:", error);
-        toast.error("Error", error.data.message);
+        toast.error(errorMessage(error));
       } finally {
         setIsLoading(false);
       }
