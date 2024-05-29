@@ -22,7 +22,7 @@ const Profile = () => {
       })
       .then((response) => {
         console.log("Response data:", response.data);
-        toast.success("Logout successful");
+        toast.success("Account Deleted successful");
         setIsLoading(false);
         logout();
       })
