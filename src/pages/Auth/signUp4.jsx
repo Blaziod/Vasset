@@ -1,29 +1,20 @@
 import { useFormik } from "formik";
-import * as yup from "yup";
-import Vasset from "../../assets/vasset.png";
 import "react-phone-number-input/style.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const validationSchema = yup.object().shape({
-  firstName: yup.string().required("First name is required"),
-  lastName: yup.string().required("Last name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
-  password: yup
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .matches(/\d/, "Password must contain a number")
-    .required("Password is required"),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match")
-    .required("Confirm password is required"),
-});
+import axios from "axios";
+import toast from "react-hot-toast";
+import { BeatLoader } from "react-spinners";
+import { errorMessage } from "utils/error-message";
+import { useAuth } from "context/AuthContext";
 
 const SignUp4 = () => {
   const navigate = useNavigate();
   const [selectedButton, setSelectedButton] = useState(null);
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { authToken } = useAuth();
+  const userId = localStorage.getItem("userId");
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -34,27 +25,64 @@ const SignUp4 = () => {
     };
 
     if (file) {
+      formik.setFieldValue("id_picture", file);
       reader.readAsDataURL(file);
     } else {
       setImage(null);
+      formik.setFieldValue("id_picture", null);
     }
   };
 
   const handleButtonClick = (buttonNumber) => {
     setSelectedButton(buttonNumber);
+    formik.setFieldValue(
+      "id_type",
+      ["passport", "nin", "National ID Card", "drivers licence"][buttonNumber]
+    );
   };
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      id_type: "",
+      id_issue_date: "",
+      id_expiration_date: "",
+      bvn: "",
+      id_picture: null,
     },
-    validationSchema,
-    onSubmit: (values) => {
-      navigate("/dashboard");
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        let formData = new FormData();
+        formData.append("id_type", values.id_type);
+        formData.append("id_issue_date", values.id_issue_date);
+        formData.append("id_expiration_date", values.id_expiration_date);
+        formData.append("bvn", values.bvn);
+        formData.append("id_picture", values.id_picture);
+        formData.append("user_id", userId);
+
+        const response = await axios.post(
+          "https://api.vassetglobal.com/api/profile/update-identification",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          toast.success("Signup Successful");
+          navigate("/dashboard");
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.error("Error signing in:", error);
+        toast.error(errorMessage(error));
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
@@ -86,8 +114,11 @@ const SignUp4 = () => {
               </div>
               <div className="mt-[20px] gap-2 flex justify-between">
                 <button
+                  type="button"
                   onClick={() => handleButtonClick(0)}
-                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
+                  className={`border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center ${
+                    selectedButton === 0 ? "border-[#005C99]" : ""
+                  }`}
                 >
                   <div className="mr-3">
                     <svg
@@ -109,8 +140,11 @@ const SignUp4 = () => {
                   Passport
                 </button>
                 <button
+                  type="button"
                   onClick={() => handleButtonClick(1)}
-                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
+                  className={`border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center ${
+                    selectedButton === 1 ? "border-[#005C99]" : ""
+                  }`}
                 >
                   <div className="mr-3">
                     <svg
@@ -134,8 +168,11 @@ const SignUp4 = () => {
               </div>
               <div className="mt-[10px] gap-2 flex justify-between">
                 <button
+                  type="button"
                   onClick={() => handleButtonClick(2)}
-                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
+                  className={`border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center ${
+                    selectedButton === 2 ? "border-[#005C99]" : ""
+                  }`}
                 >
                   <div className="mr-3">
                     <svg
@@ -157,8 +194,11 @@ const SignUp4 = () => {
                   National ID Card
                 </button>
                 <button
+                  type="button"
                   onClick={() => handleButtonClick(3)}
-                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
+                  className={`border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center ${
+                    selectedButton === 3 ? "border-[#005C99]" : ""
+                  }`}
                 >
                   <div className="mr-3">
                     <svg
@@ -186,20 +226,32 @@ const SignUp4 = () => {
                   Issue Date *
                 </h1>
                 <input
-                  type="text"
+                  type="date"
                   required
+                  name="id_issue_date"
+                  onChange={formik.handleChange}
+                  value={formik.values.id_issue_date}
                   className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
                 />
-
+                <h1 className="text-[10px] lato-bold text-[red] pb-[10px]">
+                  Format: YYYY-MM-DD
+                </h1>
                 <div>
                   <h1 className="text-[14px] lato-bold text-[#000] pb-[10px]">
                     Expiration Date *
                   </h1>
                   <input
-                    type="text"
+                    type="date"
                     required
-                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center"
+                    name="id_expiration_date"
+                    onChange={formik.handleChange}
+                    value={formik.values.id_expiration_date}
+                    className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000] flex items-center outline-none"
+                    placeholder="Expiration Date"
                   />
+                  <h1 className="text-[10px] lato-bold text-[red] pb-[10px]">
+                    Format: YYYY-MM-DD
+                  </h1>
                 </div>
               </div>
 
@@ -207,15 +259,16 @@ const SignUp4 = () => {
                 <h1 className="text-[14px] lato-bold text-[#000] pb-[10px]">
                   BVN *
                 </h1>
-
                 <input
-                  type={"text"}
+                  type="text"
                   required
+                  name="bvn"
+                  onChange={formik.handleChange}
+                  value={formik.values.bvn}
                   className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[98%] px-2 bg-white text-[#000]"
                 />
               </div>
-              {/* let formValues = JSON.parse(localStorage.getItem('formValues'));
-let firstName = formValues ? formValues.firstName : ''; */}
+
               <div className="pt-5 ">
                 <h1 className="text-[14px] lato-bold text-[#000] pb-[10px]">
                   Upload Picture *
@@ -244,7 +297,11 @@ let firstName = formValues ? formValues.firstName : ''; */}
                   type="submit"
                   className="bg-[#036] text-[#fff] w-[300px] h-[40px] rounded-[50px] mt-[20px] font-lato"
                 >
-                  Save & Continue
+                  {isLoading ? (
+                    <BeatLoader color={"#ffffff"} />
+                  ) : (
+                    "Save & Continue"
+                  )}
                 </button>
               </div>
               <div className="flex pt-3 justify-center">

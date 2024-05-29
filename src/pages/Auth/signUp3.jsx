@@ -1,30 +1,20 @@
 import { useFormik } from "formik";
-// import * as yup from "yup";
-import Vasset from "../../assets/vasset.png";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useNavigate } from "react-router-dom";
-
-// const validationSchema = yup.object().shape({
-//   nextOfKinRelationship: yup
-//     .string()
-//     .required("Next of kin relationship is required"),
-//   nextOfKinFirstName: yup
-//     .string()
-//     .required("Next of kin first name is required"),
-//   nextOfKinLastName: yup.string().required("Next of kin last name is required"),
-//   nextOfKinAddress: yup.string().required("Next of kin address is required"),
-//   nextOfKinEmail: yup
-//     .string()
-//     .email("Invalid email")
-//     .required("Next of kin email is required"),
-//   nextOfKinPhoneNumber: yup
-//     .string()
-//     .required("Next of kin phone number is required"),
-// });
+import axios from "axios";
+import toast from "react-hot-toast";
+import { BeatLoader } from "react-spinners";
+import { errorMessage } from "utils/error-message";
+import { useAuth } from "context/AuthContext";
+import { useState } from "react";
 
 const SignUp3 = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const { authToken } = useAuth();
+  const userId = localStorage.getItem("userId");
+
   const formik = useFormik({
     initialValues: {
       nextOfKinRelationship: "",
@@ -33,10 +23,47 @@ const SignUp3 = () => {
       nextOfKinAddress: "",
       nextOfKinEmail: "",
       nextOfKinPhoneNumber: "",
+      nextOfKinGender: "",
     },
-    onSubmit: (values) => {
-      localStorage.setItem("formValues2", JSON.stringify(values));
-      navigate("/identification");
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        let formData = new FormData();
+        formData.append("next_of_kin_firstname", values.nextOfKinFirstName);
+        formData.append("next_of_kin_lastname", values.nextOfKinLastName);
+        formData.append(
+          "next_of_kin_relationship",
+          values.nextOfKinRelationship
+        );
+        formData.append("next_of_kin_gender", values.nextOfKinGender);
+        formData.append("next_of_kin_phone", values.nextOfKinPhoneNumber);
+        formData.append("next_of_kin_email", values.nextOfKinEmail);
+        formData.append("next_of_kin_address", values.nextOfKinAddress);
+        formData.append("user_id", userId);
+
+        const response = await axios.post(
+          "https://api.vassetglobal.com/api/profile/update-nextofkin",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          toast.success("Signup Successful");
+          navigate("/identification");
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.error("Error signing in:", error);
+        toast.error(errorMessage(error));
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
@@ -58,18 +85,6 @@ const SignUp3 = () => {
               You’re off to a great start
             </h1>{" "}
             <div className="items-center  justify-center p-5">
-              <div className="pt-5">
-                <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
-                  Next of Kin Relationship *
-                </h1>
-                <input
-                  type="text"
-                  required
-                  name="nextOfKinRelationship"
-                  onChange={formik.handleChange}
-                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
-                />
-              </div>
               <div className="pt-5">
                 <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
                   Next of Kin First Name *
@@ -98,6 +113,31 @@ const SignUp3 = () => {
                   />
                 </div>
               </div>
+              <div className="pt-5">
+                <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
+                  Next of Kin Relationship *
+                </h1>
+                <input
+                  type="text"
+                  required
+                  name="nextOfKinRelationship"
+                  onChange={formik.handleChange}
+                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
+                />
+              </div>
+              <div className="pt-5">
+                <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
+                  Next of Kin Gender *
+                </h1>
+                <input
+                  type="text"
+                  required
+                  name="nextOfKinGender"
+                  onChange={formik.handleChange}
+                  className="border-2 border-[#D9E7F0] h-[40px] rounded-[15px] w-[95%] px-2 bg-white text-[#000]"
+                />
+              </div>
+
               <div className=" pt-5 ">
                 <div>
                   <h1 className="text-[14px] font-lato font-bold text-[#000] pb-[10px]">
@@ -144,7 +184,13 @@ const SignUp3 = () => {
                   type="submit"
                   className="bg-[#036] text-[#fff] w-[300px] h-[40px] rounded-[50px] mt-[20px] font-lato"
                 >
-                  Save & Continue
+                  {isLoading ? (
+                    <BeatLoader color={"#ffffff"} />
+                  ) : (
+                    <h1 className="text-[24px] font-lato font-bold text-[#fff]">
+                      Save & Continue
+                    </h1>
+                  )}
                 </button>
               </div>
               <div className="flex pt-5 justify-center items-center">
