@@ -9,6 +9,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
 import { errorMessage } from "utils/error-message";
+import { useAuth } from "context/AuthContext";
 
 const validationSchema = yup.object({
   firstName: yup.string().required("First name is required"),
@@ -47,6 +48,7 @@ const SignUp1 = () => {
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
   const [isConfirmPasswordVisible, setConfirmPasswordVisibility] =
     useState(false);
+  const { login } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -79,6 +81,8 @@ const SignUp1 = () => {
 
         if (response.status === 200) {
           toast.success("Signup Successful");
+          login(response.data.access_token);
+          localStorage.setItem("userId", response.data.user_data.id);
           navigate("/contact-address");
         } else {
           toast.error(response.data.message);

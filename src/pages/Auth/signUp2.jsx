@@ -1,11 +1,20 @@
 import { useFormik } from "formik";
-import Vasset from "../../assets/vasset.png";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { BeatLoader } from "react-spinners";
+import { errorMessage } from "utils/error-message";
+import { useAuth } from "context/AuthContext";
+import { useState } from "react";
 
 const SignUp2 = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const { authToken } = useAuth();
+  const userId = localStorage.getItem("userId");
+
   const formik = useFormik({
     initialValues: {
       country: "",
@@ -15,9 +24,40 @@ const SignUp2 = () => {
       postalCode: "",
       phoneNumber: "",
     },
-    onSubmit: (values) => {
-      localStorage.setItem("formValues1", JSON.stringify(values));
-      navigate("/next-of-kin");
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        let formData = new FormData();
+        formData.append("country", values.country);
+        formData.append("state", values.state);
+        formData.append("address", values.streetAddress);
+        formData.append("city", values.city);
+        formData.append("postal_code", values.postalCode);
+        formData.append("user_id", userId);
+
+        const response = await axios.post(
+          "https://api.vassetglobal.com/api/profile/update-address",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          toast.success("Signup Successful");
+          navigate("/next-of-kin");
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.error("Error signing in:", error);
+        toast.error(errorMessage(error));
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
@@ -125,7 +165,13 @@ const SignUp2 = () => {
                   type="submit"
                   className="bg-[#036] text-[#fff] w-[300px] h-[40px] rounded-[50px] mt-[20px] font-lato"
                 >
-                  Save & Continue
+                  {isLoading ? (
+                    <BeatLoader color={"#ffffff"} />
+                  ) : (
+                    <h1 className="text-[24px] font-lato font-bold text-[#fff]">
+                      Save & Continue
+                    </h1>
+                  )}
                 </button>
               </div>
               <div className="flex pt-5 gap-2 justify-center">

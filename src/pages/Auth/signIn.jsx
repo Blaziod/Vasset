@@ -42,6 +42,7 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [userId, setUserId] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -68,6 +69,8 @@ const SignIn = () => {
         if (response.status === 200) {
           toast.success("Login Successful");
           login(response.data.access_token);
+          setUserId(response.data.user_data.id);
+          localStorage.setItem("userId", response.data.user_data.id);
           navigate("/dashboard");
         } else {
           toast.error(response.data.message);
