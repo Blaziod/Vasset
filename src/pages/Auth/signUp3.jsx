@@ -14,6 +14,11 @@ const SignUp3 = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { authToken } = useAuth();
   const userId = localStorage.getItem("userId");
+  const [save, setSave] = useState(false);
+  const saveAndContinue = () => {
+    setSave(true);
+    formik.handleSubmit();
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -55,6 +60,9 @@ const SignUp3 = () => {
         if (response.status === 200) {
           toast.success("Signup Successful");
           navigate("/identification");
+          if (save) {
+            navigate("/dashboard");
+          }
         } else {
           toast.error(response.data.message);
         }
@@ -212,9 +220,17 @@ const SignUp3 = () => {
                   Your Info is safely secured
                 </h1>
               </div>
-              <h1 className="text-[#036] font-lato text-[14px] pt-6 underline text-center">
-                Save & return to Dashboard
-              </h1>
+              <div onClick={() => saveAndContinue()}>
+                <h1 className="text-[#036] font-lato text-[14px] pt-6 underline text-center">
+                  {isLoading ? (
+                    <BeatLoader color={"#000"} />
+                  ) : (
+                    <h1 className="text-[#036] font-lato text-[14px] pt-6 underline text-center">
+                      Save & Return to Dashboard
+                    </h1>
+                  )}
+                </h1>
+              </div>
             </div>
           </div>
         </form>
