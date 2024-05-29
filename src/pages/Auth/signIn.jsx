@@ -53,12 +53,12 @@ const SignIn = () => {
         const response = await axios.post(
           "https://api.vassetglobal.com/api/login",
           {
+            email_username: values.email,
+            password: values.password,
+          },
+          {
             headers: {
               "Content-Type": "application/json",
-            },
-            data: {
-              email: values.email,
-              password: values.password,
             },
           }
         );
@@ -71,7 +71,7 @@ const SignIn = () => {
         }
       } catch (error) {
         console.error("Error signing in:", error);
-        toast.error("An error occurred");
+        toast.error("Error", error);
       } finally {
         setIsLoading(false);
       }
