@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
 // Create the context
 const AuthContext = createContext(null);
@@ -7,6 +8,7 @@ const AuthContext = createContext(null);
 // Create a provider component
 export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +17,7 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         setAuthToken(token);
       }
+      setIsLoading(false);
     };
 
     loadToken();
@@ -30,6 +33,10 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("accessToken");
     navigate("/login");
   };
+
+  if (isLoading) {
+    <BeatLoader color={"#ffffff"} />;
+  }
 
   return (
     <AuthContext.Provider value={{ authToken, login, logout }}>
