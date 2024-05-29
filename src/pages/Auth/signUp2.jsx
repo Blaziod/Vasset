@@ -52,7 +52,7 @@ const SignUp2 = () => {
         );
 
         if (response.status === 200) {
-          toast.success("Signup Successful");
+          toast.success(response.data.message);
           if (save) {
             navigate("/dashboard");
           }

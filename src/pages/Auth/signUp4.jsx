@@ -77,7 +77,7 @@ const SignUp4 = () => {
         );
 
         if (response.status === 200) {
-          toast.success("Signup Successful");
+          toast.success(response.data.message);
           navigate("/dashboard");
           if (save) {
             navigate("/dashboard");
