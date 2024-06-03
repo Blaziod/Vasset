@@ -48,7 +48,7 @@ const SignUp1 = () => {
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
   const [isConfirmPasswordVisible, setConfirmPasswordVisibility] =
     useState(false);
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -84,6 +84,9 @@ const SignUp1 = () => {
           login(response.data.access_token);
           localStorage.setItem("userId", response.data.user_data.id);
           navigate("/contact-address");
+        } else if (response.status === 401) {
+          logout();
+          toast.error("Access Token Expired, Please login again");
         } else {
           toast.error(response.data.message);
         }

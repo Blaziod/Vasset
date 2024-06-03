@@ -29,6 +29,9 @@ const Profile = () => {
       .catch((error) => {
         console.error("There was an error!", error);
         toast.error(errorMessage(error));
+        if (error.response.status === 401) {
+          logout();
+        }
         setIsLoading(false);
       });
   };
