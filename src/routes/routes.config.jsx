@@ -6,11 +6,12 @@ import SignUp2 from "pages/Auth/signUp2";
 import SignUp3 from "pages/Auth/signUp3";
 import SignUp4 from "pages/Auth/signUp4";
 import Dashboard from "pages/Dashboard";
-import Assets from "pages/Assets";
+import Assets from "pages/Assets/assets";
 import Transactions from "pages/Transactions";
 import TrustFund from "pages/TrustFund";
 import Profile from "pages/Profile";
 import Invest from "pages/Invest";
+import CreateAsset from "pages/Assets/createAssets";
 import Loan from "pages/Loan";
 import Homepage from "pages/Homepage";
 import ProtectedRoute from "./protectedRoute";
@@ -96,6 +97,14 @@ const AppRouter = () => {
         element={
           <ProtectedRoute>
             <Support />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add-assets"
+        element={
+          <ProtectedRoute>
+            <CreateAsset />
           </ProtectedRoute>
         }
       />

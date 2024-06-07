@@ -28,7 +28,7 @@ import SignUp2 from "pages/Auth/signUp2";
 import SignUp3 from "pages/Auth/signUp3";
 import SignUp4 from "pages/Auth/signUp4";
 import Dashboard from "pages/Dashboard";
-import Assets from "pages/Assets";
+import Assets from "pages/Assets/assets";
 import Transactions from "pages/Transactions";
 import TrustFund from "pages/TrustFund";
 import Profile from "pages/Profile";
@@ -40,6 +40,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { errorMessage } from "utils/error-message";
 import { BeatLoader } from "react-spinners";
+import CreateAsset from "pages/Assets/createAssets";
 
 const Layout = () => {
   const { authToken, logout } = useAuth();
@@ -299,6 +300,14 @@ const Layout = () => {
               element={
                 <ProtectedRoute>
                   <Transactions />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/add-assets"
+              element={
+                <ProtectedRoute>
+                  <CreateAsset />
                 </ProtectedRoute>
               }
             />

@@ -1,6 +1,8 @@
 import Investing from "assets/Illustration.png";
+import { useNavigate } from "react-router-dom";
 
 const Assets = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-center items-center h-[100vh]">
       <div className="justify-center items-center flex">
@@ -13,6 +15,7 @@ const Assets = () => {
         <button
           type="submit"
           className="bg-[#036] text-[#fff]  h-[50px] rounded-[50px] w-[auto] mt-10 p-5 text-center flex justify-center items-center"
+          onClick={() => navigate("/add-assets")}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
