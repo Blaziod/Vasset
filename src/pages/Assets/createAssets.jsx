@@ -105,7 +105,52 @@ const CreateAsset = () => {
         </div>
       );
     } else if (selectedOption === "nft") {
-      setMenu(<div>NFT Menu</div>);
+      setMenu(
+        <div>
+          <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
+            Input Your NFT Name
+          </h1>
+          <input
+            className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
+            type="text"
+          />
+          <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
+            Input Your NFT link
+          </h1>
+          <input
+            className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
+            type="text"
+          />
+          <div className="flex justify-between">
+            <button
+              type="submit"
+              className="bg-[#036] text-[#fff] h-[50px] rounded-[10px] w-[40%] mt-10 font-lato text-[24px] text-center"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <BeatLoader color={"#ffffff"} />
+              ) : (
+                <h1 className="text-[12px] font-lato font-bold text-[#fff]">
+                  Continue
+                </h1>
+              )}
+            </button>
+            <button
+              type="button"
+              className="border-2 border-[#007A86] h-[50px] rounded-[10px] w-[40%] mt-10 text-center"
+              onClick={() => navigate("/assets")}
+            >
+              {isLoading ? (
+                <BeatLoader color={"#000"} />
+              ) : (
+                <h1 className="text-[12px] font-lato font-bold text-[#007A86]">
+                  Go Back
+                </h1>
+              )}
+            </button>
+          </div>
+        </div>
+      );
     } else if (selectedOption === "youtube") {
       setMenu(
         <div>
