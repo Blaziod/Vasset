@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BeatLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { errorMessage } from "utils/error-message";
+import { useAuth } from "context/AuthContext";
 
 const CreateAsset = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -8,6 +12,17 @@ const CreateAsset = () => {
   const [menu, setMenu] = useState(null);
   const [cryptoMenu, setCryptoMenu] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [nftName, setNftName] = useState("");
+  const [nftLink, setNftLink] = useState("");
+  const [youtubeEmail, setYoutubeEmail] = useState("");
+  const [youtubePassword, setYoutubePassword] = useState("");
+  const [socialMedia, setSocialMedia] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [description, setDescription] = useState("");
+  const [Amount, setAmount] = useState("");
+  const { authToken } = useAuth();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +62,7 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            onChange={(e) => setSocialMedia(e.target.value)}
           />
 
           <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -55,6 +71,7 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            onChange={(e) => setUsername(e.target.value)}
           />
           <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
             Input Password
@@ -62,6 +79,7 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            onChange={(e) => setPassword(e.target.value)}
           />
           <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
             Input Description
@@ -69,6 +87,7 @@ const CreateAsset = () => {
           <input
             className="h-[100px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            onChange={(e) => setDescription(e.target.value)}
           />
           <h1 className="text-[#036] text-[13px] lato-italics">
             Is this your personal or business social media?
@@ -79,6 +98,7 @@ const CreateAsset = () => {
               type="submit"
               className="bg-[#036] text-[#fff] h-[50px] rounded-[10px] w-[40%] mt-10 font-lato text-[24px] text-center"
               disabled={isLoading}
+              onClick={SubmitSocialMedia}
             >
               {isLoading ? (
                 <BeatLoader color={"#ffffff"} />
@@ -113,19 +133,22 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            onChange={(e) => setNftName(e.target.value)}
           />
           <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
             Input Your NFT link
-          </h1>
+          </h1>{" "}
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            onChange={(e) => setNftLink(e.target.value)}
           />
           <div className="flex justify-between">
             <button
               type="submit"
               className="bg-[#036] text-[#fff] h-[50px] rounded-[10px] w-[40%] mt-10 font-lato text-[24px] text-center"
               disabled={isLoading}
+              onClick={SubmitNFT}
             >
               {isLoading ? (
                 <BeatLoader color={"#ffffff"} />
@@ -160,6 +183,8 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            value={youtubeEmail}
+            onChange={(e) => setYoutubeEmail(e.target.value)}
           />
           <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
             Input YouTube Password
@@ -167,6 +192,8 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            value={youtubePassword}
+            onChange={(e) => setYoutubePassword(e.target.value)}
           />
           <div className="flex justify-between">
             <button
@@ -220,6 +247,7 @@ const CreateAsset = () => {
               <input
                 className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
                 type="text"
+                onChange={(e) => setAmount(e.target.value)}
               />
               <div>
                 <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -237,6 +265,7 @@ const CreateAsset = () => {
                 <input
                   className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
                   type="file"
+                  onChange={(e) => console.log(e.target.files[0])}
                 />
               </div>
               <div className="flex justify-between">
@@ -244,6 +273,7 @@ const CreateAsset = () => {
                   type="submit"
                   className="bg-[#036] text-[#fff] h-[50px] rounded-[10px] w-[40%] mt-10 font-lato text-[24px] text-center"
                   disabled={isLoading}
+                  onClick={SubmitCrypto}
                 >
                   {isLoading ? (
                     <BeatLoader color={"#ffffff"} />
@@ -284,6 +314,7 @@ const CreateAsset = () => {
               <input
                 className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
                 type="text"
+                onChange={(e) => setAmount(e.target.value)}
               />
               <div>
                 <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -308,6 +339,7 @@ const CreateAsset = () => {
                   type="submit"
                   className="bg-[#036] text-[#fff] h-[50px] rounded-[10px] w-[40%] mt-10 font-lato text-[24px] text-center"
                   disabled={isLoading}
+                  onClick={SubmitCrypto}
                 >
                   {isLoading ? (
                     <BeatLoader color={"#ffffff"} />
@@ -348,6 +380,7 @@ const CreateAsset = () => {
               <input
                 className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
                 type="text"
+                onChange={(e) => setAmount(e.target.value)}
               />
               <div>
                 <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -372,6 +405,7 @@ const CreateAsset = () => {
                   type="submit"
                   className="bg-[#036] text-[#fff] h-[50px] rounded-[10px] w-[40%] mt-10 font-lato text-[24px] text-center"
                   disabled={isLoading}
+                  onClick={SubmitCrypto}
                 >
                   {isLoading ? (
                     <BeatLoader color={"#ffffff"} />
@@ -412,6 +446,7 @@ const CreateAsset = () => {
               <input
                 className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
                 type="text"
+                onChange={(e) => setAmount(e.target.value)}
               />
               <div>
                 <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -436,6 +471,7 @@ const CreateAsset = () => {
                   type="submit"
                   className="bg-[#036] text-[#fff] h-[50px] rounded-[10px] w-[40%] mt-10 font-lato text-[24px] text-center"
                   disabled={isLoading}
+                  onClick={SubmitCrypto}
                 >
                   {isLoading ? (
                     <BeatLoader color={"#ffffff"} />
@@ -470,9 +506,107 @@ const CreateAsset = () => {
     }
   }, [selectedCrypto]);
 
+  const SubmitSocialMedia = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
+        "https://api.vassetglobal.com/api/users/social_media",
+        {
+          platform: socialMedia,
+          username: username,
+          password: password,
+          description: description,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      if (response.status === 201) {
+        toast.success(response.data.message);
+        setSocialMedia("");
+        setUsername("");
+        setPassword("");
+        setDescription("");
+        navigate("/assets");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+      toast.error(errorMessage(error));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const SubmitNFT = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
+        "https://api.vassetglobal.com/api/users/nfts",
+        {
+          name: nftName,
+          uri: nftLink,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      if (response.status === 201) {
+        toast.success(response.data.message);
+        setNftLink("");
+        setNftName("");
+        navigate("/assets");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+      toast.error(errorMessage(error));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const SubmitCrypto = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
+        "https://api.vassetglobal.com/api/users/cryptos",
+        {
+          symbol: selectedCrypto,
+          amount: Amount,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      if (response.status === 201) {
+        toast.success(response.data.message);
+        setNftLink("");
+        setNftName("");
+        navigate("/assets");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+      toast.error(errorMessage(error));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="p-5 min-h-screen">
-      <div className="flex items-center">
+      <div className="flex items-center" onClick={() => navigate("/assets")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"
