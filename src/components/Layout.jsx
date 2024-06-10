@@ -42,11 +42,13 @@ import { errorMessage } from "utils/error-message";
 import { BeatLoader } from "react-spinners";
 import CreateAsset from "pages/Assets/createAssets";
 import MyProfile from "pages/Profile/myProfile";
+import { useNavigation } from "react-router-dom";
 
 const Layout = () => {
   const { authToken, logout } = useAuth();
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
+  const { navigate } = useNavigation();
   const authRoutes = [
     "/create-account",
     "/contact-address",
@@ -119,52 +121,65 @@ const Layout = () => {
       <div className="pl-10 flex flex-col gap-5">
         <div
           className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
-          onClick={() => setIsMenuVisible(false)}
+          onClick={() => {
+            setIsMenuVisible(false);
+            navigate("/dashboard");
+          }}
         >
           <DashboardImage />
-          <NavLink to="/dashboard">
-            <h1 className="font-bold text-[#036] text-[15px]">Dashboard</h1>
-          </NavLink>
+          <h1 className="font-bold text-[#036] text-[15px]">Dashboard</h1>
         </div>
+
         <div
           className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
-          onClick={() => setIsMenuVisible(false)}
+          onClick={() => {
+            setIsMenuVisible(false);
+            navigate("/assets");
+          }}
         >
           <AssetImage />
-          <NavLink to="/assets">
-            <h1 className="font-bold text-[#036] text-[15px]">Assets</h1>
-          </NavLink>
+          <h1 className="font-bold text-[#036] text-[15px]">Assets</h1>
         </div>
+
         <div
           className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
-          onClick={() => setIsMenuVisible(false)}
+          onClick={() => {
+            setIsMenuVisible(false);
+            navigate("/transactions");
+          }}
         >
           <TransactionsImage />
-          <NavLink to="/transactions">
-            <h1 className="font-bold text-[#036] text-[15px]">Transactions</h1>
-          </NavLink>
+          <h1 className="font-bold text-[#036] text-[15px]">Transactions</h1>
         </div>
+
         <div
           className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
-          onClick={() => setIsMenuVisible(false)}
+          onClick={() => {
+            setIsMenuVisible(false);
+            navigate("/invest");
+          }}
         >
           <InvestImage />
-          <NavLink to="/invest">
-            <h1 className="font-bold text-[#036] text-[15px]">Invest</h1>
-          </NavLink>
+          <h1 className="font-bold text-[#036] text-[15px]">Invest</h1>
         </div>
+
         <div
           className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
-          onClick={() => setIsMenuVisible(false)}
+          onClick={() => {
+            setIsMenuVisible(false);
+            navigate("/loan");
+          }}
         >
           <LoanImage />
-          <NavLink to="/loan">
-            <h1 className="font-bold text-[#036] text-[15px]">Loan</h1>
-          </NavLink>
+
+          <h1 className="font-bold text-[#036] text-[15px]">Loan</h1>
         </div>
         <div
           className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
-          onClick={() => setIsMenuVisible(false)}
+          onClick={() => {
+            setIsMenuVisible(false);
+            navigate("/trustfund");
+          }}
         >
           <TrustImage />
           <NavLink to="/trustfund">
@@ -173,7 +188,10 @@ const Layout = () => {
         </div>
         <div
           className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
-          onClick={() => setIsMenuVisible(false)}
+          onClick={() => {
+            setIsMenuVisible(false);
+            navigate("/profile");
+          }}
         >
           <ProfileImage />
           <NavLink to="/profile">
@@ -183,7 +201,10 @@ const Layout = () => {
 
         <div
           className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
-          onClick={() => setIsMenuVisible(false)}
+          onClick={() => {
+            setIsMenuVisible(false);
+            navigate("/support");
+          }}
         >
           <SupportImage />
           <NavLink to="/support">
