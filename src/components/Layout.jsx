@@ -88,7 +88,34 @@ const Layout = () => {
   };
 
   const Menu = () => (
-    <div className="w-[200px] h-full bg-white shadow-[50px] flex flex-col rounded-tr-[50px] rounded-bl-lg">
+    <div className="absolute top-0 left-0 w-[80%] h-[auto] bg-[#c4daf1] shadow-[50px] flex flex-col rounded-tr-[50px] rounded-br-[50px] p-5 z-50">
+      <div className="flex justify-between pt-10 pb-10 items-center">
+        <div className="flex ">
+          <div>
+            <VassetLogo />
+          </div>
+          <div>
+            <VassetName />
+          </div>
+        </div>
+        <div
+          className="bg-[#fff] rounded-full p-2"
+          onClick={() => setIsMenuVisible(false)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
+          >
+            <path
+              d="M6.41285 5.00046L9.47952 1.9338C9.86619 1.54714 9.86619 0.907135 9.47952 0.520469C9.09285 0.133802 8.45285 0.133802 8.06619 0.520469L4.99952 3.58712L1.93281 0.520469C1.54615 0.133802 0.906146 0.133802 0.519492 0.520469C0.132826 0.907135 0.132826 1.54714 0.519492 1.9338L3.58618 5.00046L0.519492 8.06712C0.132826 8.45379 0.132826 9.09379 0.519492 9.48046C0.719492 9.68046 0.972811 9.77379 1.22614 9.77379C1.47948 9.77379 1.73281 9.68046 1.93281 9.48046L4.99952 6.41379L8.06619 9.48046C8.26619 9.68046 8.51952 9.77379 8.77285 9.77379C9.02619 9.77379 9.27952 9.68046 9.47952 9.48046C9.86619 9.09379 9.86619 8.45379 9.47952 8.06712L6.41285 5.00046Z"
+              fill="#005C99"
+            />
+          </svg>
+        </div>
+      </div>
       <div className="pl-10 flex flex-col gap-5">
         <div
           className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
@@ -153,39 +180,37 @@ const Layout = () => {
             <h1 className="font-bold text-[#036] text-[15px]">Profile</h1>
           </NavLink>
         </div>
-        <div className="pt-20 mt-9">
-          <div
-            className="flex gap-1 pb-5 items-center"
-            onClick={() => setIsMenuVisible(false)}
-          >
-            <SupportImage />
-            <NavLink to="/support">
-              <h1 className="font-bold text-[#036] text-[15px]">Support</h1>
-            </NavLink>
-          </div>
-          <div
-            className="flex gap-1 items-center"
-            onClick={() => {
-              LogOut();
-            }}
-          >
-            {isLoading ? (
-              <BeatLoader color={"#000"} />
-            ) : (
-              <>
-                <LogoutImage />
 
-                <h1 className="font-bold text-[#EB5757] text-[15px]">Logout</h1>
-              </>
-            )}
-          </div>
+        <div
+          className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
+          onClick={() => setIsMenuVisible(false)}
+        >
+          <SupportImage />
+          <NavLink to="/support">
+            <h1 className="font-bold text-[#036] text-[15px]">Support</h1>
+          </NavLink>
+        </div>
+        <div
+          className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
+          onClick={() => {
+            LogOut();
+          }}
+        >
+          {isLoading ? (
+            <BeatLoader color={"#000"} />
+          ) : (
+            <>
+              <LogoutImage />
+              <h1 className="font-bold text-[#EB5757] text-[15px]">Logout</h1>
+            </>
+          )}
         </div>
       </div>
     </div>
   );
 
   return (
-    <div className="w-full h-full">
+    <div className={`w-full h-full relative ${isMenuVisible ? "" : ""}`}>
       {!authRoutes.includes(location.pathname) && (
         <div className="flex bg-white pt-5 pb-5 justify-between place-items-start pr-5 pl-5">
           <div className="flex">
@@ -259,111 +284,116 @@ const Layout = () => {
           </div>
         </div>
       )}
-      {isMenuVisible ? (
-        <div className="h-full">
+      {isMenuVisible && (
+        <>
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40"
+            onClick={toggleMenu}
+          ></div>
           <Menu />
-        </div>
-      ) : (
-        <div className="bg-[#F5F5F5] w-full">
-          <RouterRoutes>
-            <Route
-              path="/login"
-              element={
-                <UnProtectedRoute>
-                  <SignIn />
-                </UnProtectedRoute>
-              }
-            />
-            <Route path="/create-account" element={<SignUp1 />} />
-            <Route path="/contact-address" element={<SignUp2 />} />
-            <Route path="/next-of-kin" element={<SignUp3 />} />
-            <Route path="/identification" element={<SignUp4 />} />
-            <Route path="/home" element={<Homepage />} />
-            {/* Private routes */}
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/assets"
-              element={
-                <ProtectedRoute>
-                  <Assets />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/transactions"
-              element={
-                <ProtectedRoute>
-                  <Transactions />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/add-assets"
-              element={
-                <ProtectedRoute>
-                  <CreateAsset />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/trustfund"
-              element={
-                <ProtectedRoute>
-                  <TrustFund />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/my-profile"
-              element={
-                <ProtectedRoute>
-                  <MyProfile />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/invest"
-              element={
-                <ProtectedRoute>
-                  <Invest />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/loan"
-              element={
-                <ProtectedRoute>
-                  <Loan />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/support"
-              element={
-                <ProtectedRoute>
-                  <Support />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/home" replace />} />
-          </RouterRoutes>
-        </div>
+        </>
       )}
+      <div
+        className={`bg-[#F5F5F5] w-full h-full ${isMenuVisible ? "fixed" : ""}`}
+      >
+        <RouterRoutes>
+          <Route
+            path="/login"
+            element={
+              <UnProtectedRoute>
+                <SignIn />
+              </UnProtectedRoute>
+            }
+          />
+          <Route path="/create-account" element={<SignUp1 />} />
+          <Route path="/contact-address" element={<SignUp2 />} />
+          <Route path="/next-of-kin" element={<SignUp3 />} />
+          <Route path="/identification" element={<SignUp4 />} />
+          <Route path="/home" element={<Homepage />} />
+          {/* Private routes */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/assets"
+            element={
+              <ProtectedRoute>
+                <Assets />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/transactions"
+            element={
+              <ProtectedRoute>
+                <Transactions />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/add-assets"
+            element={
+              <ProtectedRoute>
+                <CreateAsset />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/trustfund"
+            element={
+              <ProtectedRoute>
+                <TrustFund />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/my-profile"
+            element={
+              <ProtectedRoute>
+                <MyProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/invest"
+            element={
+              <ProtectedRoute>
+                <Invest />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/loan"
+            element={
+              <ProtectedRoute>
+                <Loan />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/support"
+            element={
+              <ProtectedRoute>
+                <Support />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/home" replace />} />
+        </RouterRoutes>
+      </div>
     </div>
   );
 };
