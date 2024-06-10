@@ -42,13 +42,13 @@ import { errorMessage } from "utils/error-message";
 import { BeatLoader } from "react-spinners";
 import CreateAsset from "pages/Assets/createAssets";
 import MyProfile from "pages/Profile/myProfile";
-import { useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Layout = () => {
   const { authToken, logout } = useAuth();
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
-  const { navigate } = useNavigation();
+  const navigate = useNavigate();
   const authRoutes = [
     "/create-account",
     "/contact-address",
