@@ -88,7 +88,7 @@ const Layout = () => {
   };
 
   const Menu = () => (
-    <div className="absolute top-0 left-0 w-[80%] h-[auto] bg-[#c4daf1] shadow-[50px] flex flex-col rounded-tr-[50px] rounded-br-[50px] p-5 z-50">
+    <div className="absolute top-5 left-0 w-[80%] h-[auto] bg-[#c4daf1] shadow-[50px] flex flex-col rounded-tr-[50px] rounded-br-[50px] p-5 z-50">
       <div className="flex justify-between pt-10 pb-10 items-center">
         <div className="flex ">
           <div>
