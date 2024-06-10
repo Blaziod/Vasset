@@ -579,7 +579,7 @@ const CreateAsset = () => {
         "https://api.vassetglobal.com/api/users/cryptos",
         {
           symbol: selectedCrypto,
-          amount: Amount,
+          amount: Number(Amount),
         },
         {
           headers: {
