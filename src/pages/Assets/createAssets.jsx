@@ -20,12 +20,13 @@ const CreateAsset = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [description, setDescription] = useState("");
-  const [Amount, setAmount] = useState("");
+  const [amount, setAmount] = useState("");
   const { authToken } = useAuth();
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("Selected Option Changed:", selectedOption);
     if (selectedOption === "crypto") {
       setMenu(
         <div>
@@ -62,6 +63,7 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            value={socialMedia}
             onChange={(e) => setSocialMedia(e.target.value)}
           />
 
@@ -71,6 +73,7 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -79,6 +82,7 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -87,6 +91,7 @@ const CreateAsset = () => {
           <input
             className="h-[100px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
           <h1 className="text-[#036] text-[13px] lato-italics">
@@ -133,6 +138,7 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            value={nftName}
             onChange={(e) => setNftName(e.target.value)}
           />
           <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -141,6 +147,7 @@ const CreateAsset = () => {
           <input
             className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
             type="text"
+            value={nftLink}
             onChange={(e) => setNftLink(e.target.value)}
           />
           <div className="flex justify-between">
@@ -228,9 +235,21 @@ const CreateAsset = () => {
     } else {
       setMenu(null);
     }
-  }, [selectedOption, cryptoMenu, isLoading, navigate]);
+  }, [
+    selectedOption,
+    cryptoMenu,
+    socialMedia,
+    username,
+    password,
+    description,
+    nftName,
+    nftLink,
+    youtubeEmail,
+    youtubePassword,
+  ]);
 
   useEffect(() => {
+    console.log("Selected Crypto Changed:", selectedCrypto);
     if (selectedOption === "crypto") {
       switch (selectedCrypto) {
         case "btc":
@@ -245,9 +264,13 @@ const CreateAsset = () => {
                 Input BTC Amount
               </h1>
               <input
-                className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
+                className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent text-[#000]"
                 type="text"
-                onChange={(e) => setAmount(e.target.value)}
+                value={amount}
+                onChange={(e) => {
+                  console.log("BTC Amount Change:", e.target.value);
+                  setAmount(e.target.value);
+                }}
               />
               <div>
                 <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -314,7 +337,11 @@ const CreateAsset = () => {
               <input
                 className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
                 type="text"
-                onChange={(e) => setAmount(e.target.value)}
+                value={amount}
+                onChange={(e) => {
+                  console.log("USDT Amount Change:", e.target.value);
+                  setAmount(e.target.value);
+                }}
               />
               <div>
                 <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -332,6 +359,7 @@ const CreateAsset = () => {
                 <input
                   className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
                   type="file"
+                  onChange={(e) => console.log(e.target.files[0])}
                 />
               </div>
               <div className="flex justify-between">
@@ -380,7 +408,11 @@ const CreateAsset = () => {
               <input
                 className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
                 type="text"
-                onChange={(e) => setAmount(e.target.value)}
+                value={amount}
+                onChange={(e) => {
+                  console.log("SOL Amount Change:", e.target.value);
+                  setAmount(e.target.value);
+                }}
               />
               <div>
                 <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -398,6 +430,7 @@ const CreateAsset = () => {
                 <input
                   className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
                   type="file"
+                  onChange={(e) => console.log(e.target.files[0])}
                 />
               </div>
               <div className="flex justify-between">
@@ -446,7 +479,11 @@ const CreateAsset = () => {
               <input
                 className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-5 bg-transparent"
                 type="text"
-                onChange={(e) => setAmount(e.target.value)}
+                value={amount}
+                onChange={(e) => {
+                  console.log("ETH Amount Change:", e.target.value);
+                  setAmount(e.target.value);
+                }}
               />
               <div>
                 <h1 className="text-[#005C99] lato-bold pt-5 text-[16px] pb-4">
@@ -464,6 +501,7 @@ const CreateAsset = () => {
                 <input
                   className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
                   type="file"
+                  onChange={(e) => console.log(e.target.files[0])}
                 />
               </div>
               <div className="flex justify-between">
@@ -504,10 +542,16 @@ const CreateAsset = () => {
     } else {
       setCryptoMenu(null);
     }
-  }, [selectedCrypto]);
+  }, [selectedCrypto, amount]);
 
   const SubmitSocialMedia = async () => {
     setIsLoading(true);
+    console.log("Submitting Social Media:", {
+      platform: socialMedia,
+      username: username,
+      password: password,
+      description: description,
+    });
     try {
       const response = await axios.post(
         "https://api.vassetglobal.com/api/users/social_media",
@@ -543,6 +587,10 @@ const CreateAsset = () => {
   };
   const SubmitNFT = async () => {
     setIsLoading(true);
+    console.log("Submitting NFT:", {
+      name: nftName,
+      uri: nftLink,
+    });
     try {
       const response = await axios.post(
         "https://api.vassetglobal.com/api/users/nfts",
@@ -574,12 +622,16 @@ const CreateAsset = () => {
   };
   const SubmitCrypto = async () => {
     setIsLoading(true);
+    console.log("Submitting Crypto:", {
+      symbol: selectedCrypto,
+      amount: Number(amount),
+    });
     try {
       const response = await axios.post(
         "https://api.vassetglobal.com/api/users/cryptos",
         {
           symbol: selectedCrypto,
-          amount: Number(Amount),
+          amount: Number(amount),
         },
         {
           headers: {
@@ -590,8 +642,7 @@ const CreateAsset = () => {
       );
       if (response.status === 201) {
         toast.success(response.data.message);
-        setNftLink("");
-        setNftName("");
+        setAmount("");
         navigate("/assets");
       } else {
         toast.error(response.data.message);

@@ -56,7 +56,7 @@ const Assets = () => {
     };
 
     fetchData();
-  }, [authToken, logout, navigate]);
+  }, []);
 
   const hasAssets = Object.values(assets).some(
     (assetArray) => Array.isArray(assetArray) && assetArray.length > 0

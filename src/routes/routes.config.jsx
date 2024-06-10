@@ -17,6 +17,7 @@ import Homepage from "pages/Homepage";
 import ProtectedRoute from "./protectedRoute";
 import Support from "pages/Support";
 import UnProtectedRoute from "./unprotectedRoute";
+import MyProfile from "pages/Profile/myProfile";
 
 const AppRouter = () => {
   return (
@@ -105,6 +106,14 @@ const AppRouter = () => {
         element={
           <ProtectedRoute>
             <CreateAsset />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/my-profile"
+        element={
+          <ProtectedRoute>
+            <MyProfile />
           </ProtectedRoute>
         }
       />

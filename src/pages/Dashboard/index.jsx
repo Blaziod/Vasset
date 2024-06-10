@@ -4,11 +4,18 @@ const Dashboard = () => {
   return (
     <div className="h-full">
       <div>
-        <div className="pl-5 pt-2">
-          <h1 className="text-[15px] text-[#036] lato-regular">
-            Current Balance
-          </h1>
-          <h1 className="text-[25px] text-[#000] lato-bold">0 USD</h1>
+        <div className="pl-5 pt-2 flex justify-between items-center pr-5">
+          <div>
+            <h1 className="text-[15px] text-[#036] lato-regular">
+              Current Balance
+            </h1>
+            <h1 className="text-[25px] text-[#000] lato-bold">0 USD</h1>
+          </div>
+          <div>
+            <button className="bg-[#036] text-white rounded-md p-2 mt-2">
+              Deposit
+            </button>
+          </div>
         </div>
 
         <div className="p-5">

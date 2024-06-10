@@ -41,6 +41,7 @@ import toast from "react-hot-toast";
 import { errorMessage } from "utils/error-message";
 import { BeatLoader } from "react-spinners";
 import CreateAsset from "pages/Assets/createAssets";
+import MyProfile from "pages/Profile/myProfile";
 
 const Layout = () => {
   const { authToken, logout } = useAuth();
@@ -88,9 +89,9 @@ const Layout = () => {
 
   const Menu = () => (
     <div className="w-[200px] h-full bg-white shadow-[50px] flex flex-col rounded-tr-[50px] rounded-bl-lg">
-      <div className="pl-10">
+      <div className="pl-10 flex flex-col gap-5">
         <div
-          className="flex gap-1 pt-10 pb-10 items-center"
+          className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
           onClick={() => setIsMenuVisible(false)}
         >
           <DashboardImage />
@@ -99,7 +100,7 @@ const Layout = () => {
           </NavLink>
         </div>
         <div
-          className="flex gap-1 pb-10 items-center"
+          className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
           onClick={() => setIsMenuVisible(false)}
         >
           <AssetImage />
@@ -108,7 +109,7 @@ const Layout = () => {
           </NavLink>
         </div>
         <div
-          className="flex gap-1 pb-10 items-center"
+          className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
           onClick={() => setIsMenuVisible(false)}
         >
           <TransactionsImage />
@@ -117,7 +118,7 @@ const Layout = () => {
           </NavLink>
         </div>
         <div
-          className="flex gap-1 pb-10 items-center"
+          className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
           onClick={() => setIsMenuVisible(false)}
         >
           <InvestImage />
@@ -126,7 +127,7 @@ const Layout = () => {
           </NavLink>
         </div>
         <div
-          className="flex gap-1 pb-10 items-center"
+          className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
           onClick={() => setIsMenuVisible(false)}
         >
           <LoanImage />
@@ -135,7 +136,7 @@ const Layout = () => {
           </NavLink>
         </div>
         <div
-          className="flex gap-1 pb-10 items-center"
+          className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
           onClick={() => setIsMenuVisible(false)}
         >
           <TrustImage />
@@ -144,7 +145,7 @@ const Layout = () => {
           </NavLink>
         </div>
         <div
-          className="flex gap-1 pb-10 items-center"
+          className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
           onClick={() => setIsMenuVisible(false)}
         >
           <ProfileImage />
@@ -324,6 +325,14 @@ const Layout = () => {
               element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/my-profile"
+              element={
+                <ProtectedRoute>
+                  <MyProfile />
                 </ProtectedRoute>
               }
             />

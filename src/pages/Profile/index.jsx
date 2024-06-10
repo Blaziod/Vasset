@@ -4,8 +4,10 @@ import toast from "react-hot-toast";
 import { errorMessage } from "utils/error-message";
 import { BeatLoader } from "react-spinners";
 import { useAuth } from "context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { logout } = useAuth();
   const token = localStorage.getItem("accessToken");
@@ -42,7 +44,10 @@ const Profile = () => {
         Account Settings
       </h1>
       <div className="flex flex-col  h-[90vh]">
-        <div className=" flex justify-between w-[90%] pt-5">
+        <div
+          className=" flex justify-between w-[90%] pt-5"
+          onClick={() => navigate("/my-profile")}
+        >
           <h1 className="text-[18px] text-[#000] lato-bold">My Profile</h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"
