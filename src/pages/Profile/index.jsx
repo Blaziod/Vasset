@@ -87,25 +87,7 @@ const Profile = () => {
             />
           </svg>
         </div>
-        <div className=" flex justify-between w-[90%] pt-7">
-          <h1 className="text-[18px] text-[#000] lato-bold">Notifications</h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
-            <path
-              d="M7.50025 3.3999L12.9335 8.83323C13.5752 9.4749 13.5752 10.5249 12.9335 11.1666L7.50025 16.5999"
-              stroke="#292D32"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
+
         <div className=" flex justify-between w-[90%] pt-7">
           <h1 className="text-[18px] text-[#000] lato-bold">
             Terms & Policies

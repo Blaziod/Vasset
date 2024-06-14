@@ -15,7 +15,7 @@ const MyProfile = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          "https://api.vassetglobal.com/api/users/profile",
+          "https://api.vassetglobal.com/api/profile",
           {
             headers: {
               "Content-Type": "application/json",
