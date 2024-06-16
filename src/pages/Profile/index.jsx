@@ -45,9 +45,9 @@ const Profile = () => {
       <h1 className="text-[25px] text-[#003366] lato-bold ">
         Account Settings
       </h1>
-      <div className="flex flex-col  h-[90vh]">
+      <div className="flex flex-col gap-5 h-[90vh] p-5">
         <div
-          className=" flex justify-between w-[90%] pt-5"
+          className=" flex justify-between w-full p-5 bg-white rounded-lg border-[#000] border-2"
           onClick={() => navigate("/my-profile")}
         >
           <h1 className="text-[18px] text-[#000] lato-bold">My Profile</h1>
@@ -68,7 +68,7 @@ const Profile = () => {
             />
           </svg>
         </div>
-        <div className=" flex justify-between w-[90%] pt-7">
+        <div className=" flex justify-between w-full p-5 bg-white rounded-lg border-2 border-[#000]">
           <h1 className="text-[18px] text-[#000] lato-bold">
             Login & Security
           </h1>
@@ -90,7 +90,10 @@ const Profile = () => {
           </svg>
         </div>
 
-        <div className=" flex justify-between w-[90%] pt-7">
+        <div
+          className=" flex justify-between w-full p-5 bg-white rounded-lg border-2 border-[#000]"
+          onClick={() => navigate("/privacy-policy")}
+        >
           <h1 className="text-[18px] text-[#000] lato-bold">
             Terms & Policies
           </h1>
@@ -111,12 +114,12 @@ const Profile = () => {
             />
           </svg>
         </div>
-        <div className=" flex justify-between w-[90%] pt-7">
+        <div className=" flex justify-center w-full p-5 bg-[#036] rounded-lg border-[#EB5757] border-2">
           <button onClick={handleDeleteAccount} disabled={isLoading}>
             {isLoading ? (
               <BeatLoader color={"#000"} />
             ) : (
-              <h1 className="text-[18px] text-[#EB5757] lato-bold">
+              <h1 className="text-[18px] text-[#EB5757] lato-bold text-center">
                 Delete Account
               </h1>
             )}

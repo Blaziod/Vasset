@@ -73,7 +73,7 @@ const Assets = () => {
           {hasAssets ? (
             <>
               <div className="pb-10">
-                <div className="bg-white p-5 rounded-lg h-[auto]">
+                <div className="bg-white p-5 rounded-lg h-[auto] border-2 border-[#000]">
                   {assets.social_media?.length > 0 && (
                     <div className="flex justify-between pt-5">
                       <h2 className="text-[20px] text-[#036] lato-bold">
@@ -131,7 +131,7 @@ const Assets = () => {
                   </div>
                 </div>
               </div>
-              <div className="bg-white p-5 rounded-lg h-[auto]">
+              <div className="bg-white p-5 rounded-lg h-[auto] border-2 border-[#000]">
                 {assets.social_media?.length > 0 && (
                   <div>
                     <h2 className="text-[20px] text-[#036] lato-bold text-center">

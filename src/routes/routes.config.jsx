@@ -18,6 +18,8 @@ import ProtectedRoute from "./protectedRoute";
 import Support from "pages/Support";
 import UnProtectedRoute from "./unprotectedRoute";
 import MyProfile from "pages/Profile/myProfile";
+import PrivacyPolicy from "pages/Profile/privacyPolicy";
+import Deposit from "deposit/deposit";
 
 const AppRouter = () => {
   return (
@@ -50,6 +52,22 @@ const AppRouter = () => {
         element={
           <ProtectedRoute>
             <Assets />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/privacy-policy"
+        element={
+          <ProtectedRoute>
+            <PrivacyPolicy />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/deposit"
+        element={
+          <ProtectedRoute>
+            <Deposit />
           </ProtectedRoute>
         }
       />

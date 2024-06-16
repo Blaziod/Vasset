@@ -43,6 +43,8 @@ import { BeatLoader } from "react-spinners";
 import CreateAsset from "pages/Assets/createAssets";
 import MyProfile from "pages/Profile/myProfile";
 import { useNavigate } from "react-router-dom";
+import PrivacyPolicy from "pages/Profile/privacyPolicy";
+import Deposit from "deposit/deposit";
 
 const Layout = () => {
   const { authToken, logout } = useAuth();
@@ -166,17 +168,6 @@ const Layout = () => {
           <h1 className="font-bold text-[#036] text-[15px]">Invest</h1>
         </div>
 
-        <div
-          className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
-          onClick={() => {
-            setIsMenuVisible(false);
-            navigate("/loan");
-          }}
-        >
-          <LoanImage />
-
-          <h1 className="font-bold text-[#036] text-[15px]">Loan</h1>
-        </div>
         <div
           className="flex gap-1 p-5 rounded-lg items-center bg-[#F5F5F5]"
           onClick={() => {
@@ -348,6 +339,22 @@ const Layout = () => {
             element={
               <ProtectedRoute>
                 <Assets />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/deposit"
+            element={
+              <ProtectedRoute>
+                <Deposit />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/privacy-policy"
+            element={
+              <ProtectedRoute>
+                <PrivacyPolicy />
               </ProtectedRoute>
             }
           />

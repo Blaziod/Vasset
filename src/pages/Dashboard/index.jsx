@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   return (
     <div className="h-full">
       <div>
@@ -12,7 +14,10 @@ const Dashboard = () => {
             <h1 className="text-[25px] text-[#000] lato-bold">0 USD</h1>
           </div>
           <div>
-            <button className="bg-[#036] text-white rounded-md p-2 mt-2">
+            <button
+              className="bg-[#036] text-white rounded-md p-2 mt-2"
+              onClick={() => navigate("/deposit")}
+            >
               Deposit
             </button>
           </div>

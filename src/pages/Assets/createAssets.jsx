@@ -206,8 +206,8 @@ const CreateAsset = () => {
             <button
               type="submit"
               className="bg-[#036] text-[#fff] h-[50px] rounded-[10px] w-[40%] mt-10 font-lato text-[24px] text-center"
-              disabled={isLoading}
               onClick={SubmitYoutube}
+              disabled={isLoading}
             >
               {isLoading ? (
                 <BeatLoader color={"#ffffff"} />
