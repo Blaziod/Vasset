@@ -69,8 +69,8 @@ const SignUp1 = () => {
             email: values.email,
             username: values.username,
             password: values.password,
-            firstName: values.firstName,
-            lastName: values.lastName,
+            firstname: values.firstName,
+            lastname: values.lastName,
           },
           {
             headers: {
@@ -85,7 +85,9 @@ const SignUp1 = () => {
           localStorage.setItem("userId", response.data.user_data.id);
           navigate("/contact-address");
         } else if (response.status === 401) {
-          logout();
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("userId");
+          navigate("/login");
           toast.error("Access Token Expired, Please login again");
         } else {
           toast.error(response.data.message);

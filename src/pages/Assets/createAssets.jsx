@@ -207,6 +207,7 @@ const CreateAsset = () => {
               type="submit"
               className="bg-[#036] text-[#fff] h-[50px] rounded-[10px] w-[40%] mt-10 font-lato text-[24px] text-center"
               disabled={isLoading}
+              onClick={SubmitYoutube}
             >
               {isLoading ? (
                 <BeatLoader color={"#ffffff"} />
@@ -597,6 +598,42 @@ const CreateAsset = () => {
         {
           name: nftName,
           uri: nftLink,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      if (response.status === 201) {
+        toast.success(response.data.message);
+        setNftLink("");
+        setNftName("");
+        navigate("/assets");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+      toast.error(errorMessage(error));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const SubmitYoutube = async () => {
+    setIsLoading(true);
+    console.log("Submitting NFT:", {
+      name: nftName,
+      uri: nftLink,
+    });
+    try {
+      const response = await axios.post(
+        "https://api.vassetglobal.com/api/users/youtube",
+        {
+          email: youtubeEmail,
+          password: youtubePassword,
         },
         {
           headers: {

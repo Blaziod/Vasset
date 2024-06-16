@@ -32,7 +32,9 @@ const Profile = () => {
         console.error("There was an error!", error);
         toast.error(errorMessage(error));
         if (error.response.status === 401) {
-          logout();
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("userId");
+          navigate("/login");
         }
         setIsLoading(false);
       });

@@ -43,6 +43,8 @@ const Assets = () => {
           toast.error("Unauthorized access, please login");
           setIsLoading(false);
           logout();
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("userId");
           navigate("/login");
         } else {
           toast.error(response.data.message);
