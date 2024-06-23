@@ -193,7 +193,7 @@ const Deposit = () => {
       if (depositResponse.status === 200) {
         if (image) {
           const formData = new FormData();
-          formData.append("proof", image);
+          formData.append("screenshot", image);
           await axios.post(
             "https://api.vassetglobal.com/api/payment/screenshot/1",
             formData,
