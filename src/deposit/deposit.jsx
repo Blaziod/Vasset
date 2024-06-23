@@ -14,6 +14,7 @@ import ETH_ERC20_QR from "assets/btcqr.png";
 import ETH_BEP20_QR from "assets/btcqr.png";
 import ETH_ARBITRUM_QR from "assets/btcqr.png";
 import SOLQR from "assets/btcqr.png";
+import { BeatLoader } from "react-spinners";
 
 const CustomSingleValue = ({ children, ...props }) => (
   <components.SingleValue {...props}>
@@ -38,6 +39,8 @@ const Deposit = () => {
   const [depositInstructions, setDepositInstructions] = useState("");
   const [depositAmount, setDepositAmount] = useState("");
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { authToken } = useAuth();
 
   const options = [
     {
@@ -169,46 +172,56 @@ const Deposit = () => {
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+      setImage(file);
     } else {
       alert("Please select an image file.");
     }
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     try {
       const depositResponse = await axios.post(
-        "https://api.vassetglobal.com/api/deposit",
+        "https://api.vassetglobal.com/api/payment",
         {
-          coin: selectedOption,
-          networkType: walletType,
+          coin_type: selectedOption,
+          wallet_type: walletType,
           amount: depositAmount,
           wallet_address: "sljsknflkasnlf",
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
         }
       );
-      if (depositResponse.status === 200) {
+      if (depositResponse.status === 201) {
         if (image) {
           const formData = new FormData();
           formData.append("screenshot", image);
           await axios.post(
-            "https://api.vassetglobal.com/api/payment/screenshot/1",
+            `https://api.vassetglobal.com/api/payment/screenshot/${depositResponse.data.transaction_id}`,
             formData,
             {
               headers: {
-                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${authToken}`,
               },
             }
           );
         }
+        setIsLoading(false);
         toast.success("Deposit request submitted successfully!");
+        setSelectedOption(null);
+        setWalletType("");
+        setDepositAmount("");
+        navigate("/dashboard");
       } else {
+        setIsLoading(false);
         toast.error("Error in submitting deposit request");
       }
     } catch (error) {
+      setIsLoading(false);
       toast.error(errorMessage(error));
     }
   };
@@ -365,7 +378,14 @@ const Deposit = () => {
           onClick={handleSubmit}
           className="bg-[#036] text-white rounded-lg justify-center mt-5 mb-20 w-[150px] h-[40px]"
         >
-          Submit
+          {" "}
+          {isLoading ? (
+            <BeatLoader color={"#fff"} />
+          ) : (
+            <h1 className="text-[12px] font-lato font-bold text-[#fff]">
+              Submit
+            </h1>
+          )}
         </button>
       </div>
     </div>
