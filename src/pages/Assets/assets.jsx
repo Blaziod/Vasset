@@ -17,6 +17,7 @@ const Assets = () => {
     real_estates: [],
     social_media: [],
     stocks: [],
+    youtube: [],
   });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -113,6 +114,19 @@ const Assets = () => {
                       </div>
                     </div>
                   )}
+                  {assets.youtube?.length > 0 && (
+                    <div className="flex justify-between pt-5">
+                      <h2 className="text-[20px] text-[#036] lato-bold">
+                        Youtube
+                      </h2>
+                      <div
+                        style={{ backgroundColor: "rgba(0, 51, 102, 0.14)" }}
+                        className="rounded-[20px] p-4 h-[35px] flex justify-center items-center text-[#036]"
+                      >
+                        <h1 className="text-[#036]">Active</h1>
+                      </div>
+                    </div>
+                  )}
 
                   {assets.businesses?.length > 0 && (
                     <div>
@@ -148,6 +162,27 @@ const Assets = () => {
                         </h1>
                         <h1 className="text-[13px] text-[#036] lato-regular">
                           {account.username}
+                        </h1>
+                      </>
+                    ))}
+                  </div>
+                )}
+                {assets.youtube?.length > 0 && (
+                  <div>
+                    <h2 className="text-[20px] text-[#036] lato-bold text-center">
+                      Youtube
+                    </h2>
+
+                    {assets.youtube.map((account) => (
+                      <>
+                        <h1
+                          key={account.id}
+                          className="text-[16px] text-[#036] lato-bold"
+                        >
+                          Email:
+                        </h1>
+                        <h1 className="text-[13px] text-[#036] lato-regular">
+                          {account.email}
                         </h1>
                       </>
                     ))}

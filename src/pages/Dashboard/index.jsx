@@ -1,8 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { errorMessage } from "utils/error-message";
+import { useAuth } from "context/AuthContext";
+import { BeatLoader } from "react-spinners";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { authToken, logout } = useAuth();
+  const [assets, setAssets] = useState({
+    businesses: [],
+    cryptos: [],
+    nfts: [],
+    real_estates: [],
+    social_media: [],
+    stocks: [],
+    youtube: [],
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(
+          "https://api.vassetglobal.com/api/users/assets",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authToken}`,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          toast.success("Assets fetched successfully");
+          setAssets(response.data.message || {});
+          console.log(response.data.message);
+          setIsLoading(false);
+        } else if (response.status === 401) {
+          toast.error("Unauthorized access, please login");
+          setIsLoading(false);
+          logout();
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("userId");
+          navigate("/login");
+        } else {
+          toast.error(response.data.message);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching assets:", error);
+        toast.error(errorMessage(error));
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const hasAssets = Object.values(assets).some(
+    (assetArray) => Array.isArray(assetArray) && assetArray.length > 0
+  );
   return (
     <div className="h-full">
       <div>
@@ -72,31 +132,110 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="p-5">
-          <div className="bg-white h-[360px] rounded-md p-3">
+          <div className="bg-white h-[auto] rounded-md p-3">
             <div className=" flex justify-between">
               <h1 className="text-[18px] text-[#036] lato-regular">
-                My Portfolio
+                My Assets
               </h1>
-              <div className="flex gap-1">
-                <h1 className="text-[12px] lato-regular text-[#036]">1hr</h1>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                >
-                  <path
-                    d="M5.09473 8.08236C4.76933 7.75696 4.24174 7.75695 3.91634 8.08236C3.59094 8.40776 3.59094 8.93534 3.91634 9.26074L6.69454 12.0389C8.52208 13.8665 11.482 13.8765 13.3218 12.0613L16.0755 9.34464C16.4031 9.02143 16.4067 8.49385 16.0835 8.16619C15.7603 7.83853 15.2327 7.83485 14.905 8.15799L12.7415 10.2914C11.2263 11.7855 8.78935 11.777 7.28466 10.2723L5.09473 8.08236Z"
-                    fill="#333333"
-                  />
-                </svg>
-              </div>
             </div>
-            <div className="flex justify-center align-middle pl-10 pt-20 pr-10">
-              <h1 className="text-[15px] text-[#007A86] lato-regular text-center">
-                You do not yet have any asset/cryptocurrency in your Portfolio
-              </h1>
+            <div className=" pt-5">
+              <div>
+                {isLoading ? (
+                  <BeatLoader color={"#036"} size={50} />
+                ) : (
+                  <>
+                    {hasAssets ? (
+                      <>
+                        <div>
+                          <div className="bg-white rounded-lg h-[auto] p-5 border-2 border-[#000]">
+                            {assets.social_media?.length > 0 && (
+                              <div className="flex justify-between pt-5">
+                                <h2 className="text-[20px] text-[#036] lato-bold">
+                                  Social Media Accounts
+                                </h2>
+                                <div
+                                  style={{
+                                    backgroundColor: "rgba(0, 51, 102, 0.14)",
+                                  }}
+                                  className="rounded-[20px] p-4 h-[35px] flex justify-center items-center text-[#036]"
+                                >
+                                  <h1 className="text-[#036]">Active</h1>
+                                </div>
+                              </div>
+                            )}
+                            {assets.cryptos?.length > 0 && (
+                              <div className="flex justify-between pt-5">
+                                <h2 className="text-[20px] text-[#036] lato-bold">
+                                  Crypto Currency
+                                </h2>
+                                <div
+                                  style={{
+                                    backgroundColor: "rgba(0, 51, 102, 0.14)",
+                                  }}
+                                  className="rounded-[20px] p-4 h-[35px] flex justify-center items-center text-[#036]"
+                                >
+                                  <h1 className="text-[#036]">Active</h1>
+                                </div>
+                              </div>
+                            )}
+                            {assets.nfts?.length > 0 && (
+                              <div className="flex justify-between pt-5">
+                                <h2 className="text-[20px] text-[#036] lato-bold">
+                                  NFTs
+                                </h2>
+                                <div
+                                  style={{
+                                    backgroundColor: "rgba(0, 51, 102, 0.14)",
+                                  }}
+                                  className="rounded-[20px] p-4 h-[35px] flex justify-center items-center text-[#036]"
+                                >
+                                  <h1 className="text-[#036]">Active</h1>
+                                </div>
+                              </div>
+                            )}
+                            {assets.youtube?.length > 0 && (
+                              <div className="flex justify-between pt-5">
+                                <h2 className="text-[20px] text-[#036] lato-bold">
+                                  Youtube
+                                </h2>
+                                <div
+                                  style={{
+                                    backgroundColor: "rgba(0, 51, 102, 0.14)",
+                                  }}
+                                  className="rounded-[20px] p-4 h-[35px] flex justify-center items-center text-[#036]"
+                                >
+                                  <h1 className="text-[#036]">Active</h1>
+                                </div>
+                              </div>
+                            )}
+
+                            {assets.businesses?.length > 0 && (
+                              <div>
+                                <h2 className="text-[20px] text-[#036] lato-bold pt-5 text-center">
+                                  Businesses
+                                </h2>
+                              </div>
+                            )}
+                            <div className="pt-10 pb-5">
+                              <button
+                                className="border-2 border-[#999999] flex justify-center items-center rounded-md p-2 h-[40px]"
+                                onClick={() => navigate("/add-assets")}
+                              >
+                                <h1 className="text-[#333]">Add New Asset +</h1>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <h1 className="text-[15px] text-[#007A86] lato-regular text-center">
+                        You do not yet have any asset/cryptocurrency in your
+                        Portfolio
+                      </h1>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>

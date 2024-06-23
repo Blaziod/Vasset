@@ -179,6 +179,40 @@ const Deposit = () => {
     }
   };
 
+  const handleSubmit = async () => {
+    try {
+      const depositResponse = await axios.post(
+        "https://api.vassetglobal.com/api/deposit",
+        {
+          coin: selectedOption,
+          networkType: walletType,
+          amount: depositAmount,
+          wallet_address: "sljsknflkasnlf",
+        }
+      );
+      if (depositResponse.status === 200) {
+        if (image) {
+          const formData = new FormData();
+          formData.append("proof", image);
+          await axios.post(
+            "https://api.vassetglobal.com/api/payment/screenshot/1",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+        }
+        toast.success("Deposit request submitted successfully!");
+      } else {
+        toast.error("Error in submitting deposit request");
+      }
+    } catch (error) {
+      toast.error(errorMessage(error));
+    }
+  };
+
   const fetchCryptoData = async (cryptoId) => {
     try {
       const response = await axios.get(
@@ -327,7 +361,10 @@ const Deposit = () => {
             </ul>
           </div>
         </div>
-        <button className="bg-[#036] text-white rounded-lg justify-center mt-5 mb-20 w-[150px] h-[40px]">
+        <button
+          onClick={handleSubmit}
+          className="bg-[#036] text-white rounded-lg justify-center mt-5 mb-20 w-[150px] h-[40px]"
+        >
           Submit
         </button>
       </div>
