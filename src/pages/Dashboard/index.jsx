@@ -52,13 +52,7 @@ const Dashboard = () => {
           toast.success("Assets fetched successfully");
           setAssets(assetResponse.data.message || {});
           setIsLoading(false);
-        } else if (assetResponse.status === 401) {
-          toast.error("Unauthorized access, please login");
-          setIsLoading(false);
-          logout();
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("userId");
-          navigate("/login");
+          console.log(assetResponse);
         } else {
           toast.error(assetResponse.data.message);
           setIsLoading(false);
@@ -75,7 +69,15 @@ const Dashboard = () => {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error(errorMessage(error));
+        if (error.response && error.response.data.message === 401) {
+          toast.error("Unauthorized access, please login");
+          logout();
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("userId");
+          navigate("/login");
+        } else {
+          toast.error(errorMessage(error));
+        }
         setIsLoading(false);
       }
     };
