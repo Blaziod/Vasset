@@ -70,7 +70,7 @@ const Profile = () => {
         </div>
         <div className=" flex justify-between w-full p-5 bg-white rounded-lg border-2 border-[#000]">
           <h1 className="text-[18px] text-[#000] lato-bold">
-            Login & Security
+            Security & Identification
           </h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"

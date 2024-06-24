@@ -13,6 +13,16 @@ const MyProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [profile, setProfile] = useState([]);
   const [image, setImage] = useState(null);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [username, setUsername] = useState("");
+  const [gender, setGender] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
+  const [postalCode, setPostalCode] = useState("");
 
   const handleSubmit = async () => {
     if (!image) return;
@@ -91,6 +101,82 @@ const MyProfile = () => {
     fetchData();
   }, [authToken, logout, navigate]);
 
+  const userId = localStorage.getItem("userId");
+
+  const handleProfileSubmit = async () => {
+    setIsLoading(true);
+    try {
+      let formData = new FormData();
+      formData.append("firstname", firstname || profile.firstname);
+      formData.append("lastname", lastname || profile.lastname);
+      formData.append("email", email || profile.email);
+      formData.append("phone", phone || profile.phone);
+      formData.append("username", username || profile.username);
+      formData.append("gender", gender || profile.gender);
+      formData.append("user_id", Number(userId));
+      const profileResponse = await axios.post(
+        "https://api.vassetglobal.com/api/profile/update",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      if (profileResponse.status === 200) {
+        setIsLoading(false);
+        toast.success("Profile Updated successfully!");
+        setUsername("");
+        setPhone("");
+        setLastname("");
+        setFirstname("");
+        setGender("");
+        fetchData();
+      } else {
+        setIsLoading(false);
+        toast.error("Error in updating address");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(errorMessage(error));
+    }
+  };
+  const handleAddressSubmit = async () => {
+    setIsLoading(true);
+    try {
+      let formData = new FormData();
+      formData.append("country", country || profile.country);
+      formData.append("city", city || profile.city);
+      formData.append("postal_code", postalCode || profile.postal_code);
+      formData.append("user_id", Number(userId));
+      formData.append("address", address || profile.address);
+      const profileResponse = await axios.post(
+        "https://api.vassetglobal.com/api/profile/update-address",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      if (profileResponse.status === 200) {
+        setIsLoading(false);
+        toast.success("Address Updated successfully!");
+        setCountry("");
+        setCity("");
+        setPostalCode("");
+        setAddress("");
+        fetchData();
+      } else {
+        setIsLoading(false);
+        toast.error("Error in updating address");
+      }
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(errorMessage(error));
+    }
+  };
+
   return (
     <div className="p-5">
       <div
@@ -117,7 +203,9 @@ const MyProfile = () => {
       </div>
       <div>
         {isLoading ? (
-          <BeatLoader color={"#036"} size={50} />
+          <div className="flex justify-center items-center h-[90vh]">
+            <BeatLoader color={"#036"} size={50} />
+          </div>
         ) : (
           <>
             <div>
@@ -136,17 +224,17 @@ const MyProfile = () => {
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
             </div>
-            <div className="pt-5">
+            <div className="pt-1">
               <h1 className="text-[16px] text-[#000000] lato-bold">
                 {profile?.firstname} {profile.lastname}
               </h1>
             </div>
-            <div className="pt-2">
+            <div className="pt-1">
               <h1 className="text-[15px] text-[#707070] lato-regular">
                 Novice
               </h1>
             </div>
-            <div className="pt-2">
+            <div className="pt-1">
               <h1 className="text-[13px] text-[#AAAAAA] lato-regular">
                 {profile?.address}
               </h1>
@@ -164,6 +252,8 @@ const MyProfile = () => {
                     type="text"
                     placeholder={profile?.firstname}
                     className="border-2 border-[#aaa] rounded-lg p-2 w-full"
+                    value={firstname}
+                    onChange={(e) => setFirstname(e.target.value)}
                   />
                 </div>
               </div>
@@ -174,6 +264,8 @@ const MyProfile = () => {
                     type="text"
                     placeholder={profile?.lastname}
                     className="border-2 border-[#aaa] rounded-lg p-2 w-full"
+                    value={lastname}
+                    onChange={(e) => setLastname(e.target.value)}
                   />
                 </div>
               </div>
@@ -184,6 +276,10 @@ const MyProfile = () => {
                     type="text"
                     placeholder={profile?.email}
                     className="border-2 border-[#aaa] rounded-lg p-2 w-full"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled
+                    placeholderTextColor="#000"
                   />
                 </div>
               </div>
@@ -196,6 +292,8 @@ const MyProfile = () => {
                     type="text"
                     placeholder={profile?.phone || "Input Phone Number"}
                     className="border-2 border-[#aaa] rounded-lg p-2 w-full"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
               </div>
@@ -206,11 +304,30 @@ const MyProfile = () => {
                     type="text"
                     placeholder={profile?.username || "Input Username"}
                     className="border-2 border-[#aaa] rounded-lg p-2 w-full"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    disabled
+                    placeholderTextColor="#000"
+                  />
+                </div>
+              </div>
+              <div className="pt-5">
+                <h1 className="text-[16px] text-[#000] lato-bold"> Gender</h1>
+                <div className="pt-2">
+                  <input
+                    type="text"
+                    placeholder={profile?.gender || "Input Gender"}
+                    className="border-2 border-[#aaa] rounded-lg p-2 w-full"
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
                   />
                 </div>
               </div>
               <div className="pt-5" />
-              <div className="flex gap-2 items-center border-2 border-[#036] p-2 h-[auto] w-[auto] rounded-[10px] justify-center">
+              <div
+                className="flex gap-2 items-center border-2 border-[#036] p-2 h-[auto] w-[auto] rounded-[10px] justify-center"
+                onClick={() => handleProfileSubmit()}
+              >
                 <h1 className="text-[16px] text-[#036] lato-bold"> Update</h1>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -259,6 +376,8 @@ const MyProfile = () => {
                     type="text"
                     placeholder={profile?.country || "Input Your Country"}
                     className="border-2 border-[#aaa] rounded-lg p-2 w-full"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
                   />
                 </div>
               </div>
@@ -271,6 +390,20 @@ const MyProfile = () => {
                     type="text"
                     placeholder={profile?.city || "Input Your State"}
                     className="border-2 border-[#aaa] rounded-lg p-2 w-full"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="pt-5">
+                <h1 className="text-[16px] text-[#000] lato-bold">Address</h1>
+                <div className="pt-2">
+                  <input
+                    type="text"
+                    placeholder={profile?.address || "Input Your Address"}
+                    className="border-2 border-[#aaa] rounded-lg p-2 w-full"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
               </div>
@@ -285,12 +418,17 @@ const MyProfile = () => {
                       profile?.postal_code || "Input Your Postal Code"
                     }
                     className="border-2 border-[#aaa] rounded-lg p-2 w-full"
+                    value={postalCode}
+                    onChange={(e) => setPostalCode(e.target.value)}
                   />
                 </div>
               </div>
 
               <div className="pt-5" />
-              <div className="flex gap-2 items-center border-2 border-[#036] p-2 h-[auto] w-[auto] rounded-[10px] justify-center">
+              <div
+                className="flex gap-2 items-center border-2 border-[#036] p-2 h-[auto] w-[auto] rounded-[10px] justify-center"
+                onClick={() => handleAddressSubmit()}
+              >
                 <h1 className="text-[16px] text-[#036] lato-bold"> Update</h1>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
