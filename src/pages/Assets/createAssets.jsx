@@ -22,6 +22,7 @@ const CreateAsset = () => {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const { authToken } = useAuth();
+  const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -287,9 +288,11 @@ const CreateAsset = () => {
                   Upload Proof of Payment
                 </h1>
                 <input
-                  className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
                   type="file"
-                  onChange={(e) => console.log(e.target.files[0])}
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
+                  id="imageUpload"
                 />
               </div>
               <div className="flex justify-between">
@@ -358,9 +361,11 @@ const CreateAsset = () => {
                   Upload Proof of Payment
                 </h1>
                 <input
-                  className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
                   type="file"
-                  onChange={(e) => console.log(e.target.files[0])}
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
+                  id="imageUpload"
                 />
               </div>
               <div className="flex justify-between">
@@ -429,9 +434,11 @@ const CreateAsset = () => {
                   Upload Proof of Payment
                 </h1>
                 <input
-                  className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
                   type="file"
-                  onChange={(e) => console.log(e.target.files[0])}
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
+                  id="imageUpload"
                 />
               </div>
               <div className="flex justify-between">
@@ -500,9 +507,11 @@ const CreateAsset = () => {
                   Upload Proof of Payment
                 </h1>
                 <input
-                  className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
                   type="file"
-                  onChange={(e) => console.log(e.target.files[0])}
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="h-[40px] rounded-lg border-2 border-[#CCC] items-center flex justify-center w-[100%] p-1 bg-transparent"
+                  id="imageUpload"
                 />
               </div>
               <div className="flex justify-between">
@@ -544,6 +553,15 @@ const CreateAsset = () => {
       setCryptoMenu(null);
     }
   }, [selectedCrypto, amount]);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      setImage(file);
+    } else {
+      alert("Please select an image file.");
+    }
+  };
 
   const SubmitSocialMedia = async () => {
     setIsLoading(true);
@@ -662,6 +680,7 @@ const CreateAsset = () => {
     console.log("Submitting Crypto:", {
       symbol: selectedCrypto,
       amount: Number(amount),
+      screenshot: image,
     });
     try {
       const response = await axios.post(
@@ -669,6 +688,7 @@ const CreateAsset = () => {
         {
           symbol: selectedCrypto,
           amount: Number(amount),
+          screenshot: image,
         },
         {
           headers: {
